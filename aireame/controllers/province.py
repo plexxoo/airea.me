@@ -36,9 +36,11 @@ def index():
     form = crud.select(db.province, fields = ['province.id', 'province.name',  'province.code', ], headers = {'province.id': T("Actions"), 'province.name': 'Name',  'province.code': 'Code', })
     return dict(form=form,auser=auth.user)
 
+@auth.requires_login()
 def create():
     return dict(form=crud.create(db.province),auser=auth.user)
 
+@auth.requires_login()
 def update():
     return dict(form=crud.update(db.province, request.args(0)),auser=auth.user)
    
