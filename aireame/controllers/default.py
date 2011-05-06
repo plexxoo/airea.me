@@ -1,19 +1,47 @@
-# -*- coding: utf-8 -*-
-# this file is released under public domain and you can use without limitations
-
-#########################################################################
-## This is a samples controller
-## - index is the default action of any application
-## - user is required for authentication and authorization
-## - download is for downloading files uploaded in the db (does streaming)
-## - call exposes all registered services (none by default)
-#########################################################################
+# -*- coding: utf-8 -*- 
+# Este fichero forma parte de airea.me
+#
+# Copyright 2011 Plexxoo Interactiva S.L.
+# Copyright Daniel Gonzalez     <demetrio@plexxoo.com>
+# Copyright Silvia Martín       <smartin@plexxoo.com>
+# Copyright Jon Latorre         <moebius@plexxoo.com>
+# Copyright Jesus Martinez      <jamarcer@plexxoo.com>
+#
+# Este fichero se distribuye bajo la licencia GPL según las
+# condiciones que figuran en el fichero 'licence' que se acompaña.
+# Si se distribuyera este fichero individualmente, DEBE incluirse aquí
+# las condiciones expresadas allí.
+#
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 def index():
-    """
-    example action using the internationalization operator T and flash
-    rendered by views/default/index.html or views/generic.html
-    """
+
+    #Detectamos si el navegador es un movil
+    detect = local_import("detect")
+    
+
+    is_mobile = detect.detect_mobile_browser(request.env.http_user_agent)
+    #forzar vista movil:
+    #is_mobile = True
+    if is_mobile:
+        #Es un movil             
+        response.view = "%s/%s.%s" % (request.controller, request.function, "mobile")
+	if not os.path.exists(os.path.join(request.folder, 'views', request.controller, "mobile")):
+	    response.view = '%s.%s' % ("generic", "mobile") 
+
     return dict(message=T('Hello World'))
 
 def user():

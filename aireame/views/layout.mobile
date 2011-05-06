@@ -1,0 +1,29 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+    <title>{{=response.title or request.application}}</title>
+	<link rel="stylesheet"  href="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.min.css')}}" />  
+	    {{#------ include web2py specific js code (jquery, calendar, form stuff) ------}}
+	    {{include 'web2py_ajax.html'}}
+	<script type="text/javascript" src="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.min.js')}}"></script>
+
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header" data-theme="b">
+		<h1>Pagina generica</h1>
+		<a href="{{=URL(r=request, c="default")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+	{{=BEAUTIFY(response.vars)}}
+</div><!-- /page -->
+
+</body>
+</html>
+
