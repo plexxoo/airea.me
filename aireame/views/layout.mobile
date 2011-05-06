@@ -11,19 +11,7 @@
 
 </head> 
 <body> 
-
-<div data-role="page">
-
-	<div data-role="header" data-theme="b">
-		<h1>Pagina generica</h1>
-		<a href="{{=URL(r=request, c="default")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
-	</div><!-- /header -->
-
-	<div data-role="content">
-
-	{{=BEAUTIFY(response.vars)}}
-</div><!-- /page -->
-
+{{include}}
 </body>
 </html>
 
