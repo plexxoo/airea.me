@@ -8,7 +8,7 @@ response.title = 'airea.me'
 response.subtitle = T('Aireate')
 
 #http://dev.w3.org/html5/markup/meta.name.html
-response.meta.author = 'Plexoo team Abredatos 2011'
+response.meta.author = 'Plexxoo Team Abredatos 2011'
 response.meta.description = 'Airea.me'
 response.meta.keywords = 'opendata, abredatos, web2py, python, framework'
 response.meta.generator = 'Web2py Enterprise Framework'
@@ -37,6 +37,8 @@ response.menu = [
 
 response.menu+=[
     (T('Master'), False, None,
-     [(T('Province'), False, URL(request.application, 'province', 'index'))]
+     [(T('Zone'), False, URL(request.application, 'zone', 'index')),
+      (T('Province'), False, URL(request.application, 'province', 'index'))
+     ]
    )]
 
