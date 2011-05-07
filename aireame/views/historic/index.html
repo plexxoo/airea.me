@@ -1,0 +1,13 @@
+{{extend 'historic/base.html'}} 
+<h2>{{=T('Measurement Station by Zone')}}</h2>
+<ul>
+{{for zone in data.keys():}}
+<li>{{=zone}}
+<ul>
+{{for station in data[zone]:}}
+<li>{{=station.name}}&nbsp;{{=A(T('original info.'),_href=station.href,_target="_blank")}}</li>
+{{pass}}
+</ul>
+</li>
+{{pass}}
+</ul>
