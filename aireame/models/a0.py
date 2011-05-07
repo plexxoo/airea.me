@@ -31,9 +31,14 @@ import os
 # Base path
 w2p_path=request.env.web2py_path
 
-# Basic PATH
-W2P_APP_PATH=os.path.join(w2p_path,'applications')
-APP_PATH=os.path.join(W2P_APP_PATH,request.application)
+# Parameters
+W2P_APP_PATH=os.path.join(w2p_path,'applications')                                  #: Web2py applications path
+APP_PATH=os.path.join(W2P_APP_PATH,request.application)                             #: Application path
+HOST='http://'+request.env.http_host                                                #: Host URL
+APP_URL='%s/%s' %(HOST, request.application)                                        #: Application URL base
 
 # DAL definition
 DB_DAL='sqlite://storage.db'
+
+# Links
+CVS_URL='http://opendata.euskadi.net/w79-contdata/es/contenidos/ds_geograficos/red_calidad_aire/es_opendata/adjuntos/estaciones.csv'
