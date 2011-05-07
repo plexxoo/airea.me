@@ -17,11 +17,12 @@
 <script type="text/javascript" src="{{=URL('static','js/google_apis_inits.js')}}"></script>
 <script>
 $('.page-map').live("pagecreate", function() {
-			if(navigator.geolocation) {
+			AireaMeGoogleApis.initializeMap();
+			/*if(navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position){
 					AireaMeGoogleApis.initializeMap(position.coords.latitude,position.coords.longitude);
 				});
-			}
+			}*/
 	});
 
 google.load('visualization', '1', {'packages':['motionchart']});
