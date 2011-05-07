@@ -115,3 +115,37 @@ except:
     except_data=sys.exc_info()
     msg="Unexpected error: %s"%except_data[0]
     pass
+
+# Measurement units
+try:    
+    if db(db.measurement_unit.id >= 1).count() == 0:
+        elements=[{'literal': 'Amoníaco', 'code': 'NH3', 'units':'µg/m3'},
+                  {'literal': 'Benceno C6H6', 'code': 'C6H6', 'units':'µg/m3'},
+                  {'literal': 'Direc. Viento', 'code': 'DirV', 'units':'º'},
+                  {'literal': 'Dióxido de azufre', 'code': 'SO2', 'units':'µg/m3'},
+                  {'literal': 'Dióxido de nitrógeno', 'code': 'NO2', 'units':'µg/m3'},
+                  {'literal': 'Etilbenceno C8H10', 'code': 'C8H10', 'units':'µg/m3'},
+                  {'literal': 'Hidrocarburos metánicos', 'code': 'HC met', 'units':'µg/m3'},
+                  {'literal': 'Hidrocarburos no metánicos', 'code': 'HC no met', 'units':'µg/m3'},
+                  {'literal': 'Hidrocarburos totales', 'code': 'HC', 'units':'µg/m3'},
+                  {'literal': 'Humedad relativa', 'code': 'Humedad', 'units':'%'},
+                  {'literal': 'Monóxido de carbono', 'code': 'CO', 'units':'µg/m3'},
+                  {'literal': 'Monóxido de nitrógeno', 'code': 'NO', 'units':'µg/m3'},
+                  {'literal': 'O-Xileno C8H10', 'code': 'O_C8H10', 'units':'µg/m3'},
+                  {'literal': 'Ozono', 'code': 'O3', 'units':'µg/m3'},
+                  {'literal': 'PM10', 'code': 'PM10', 'units':'µg/m3'},
+                  {'literal': 'PM2.5', 'code': 'PM2.5', 'units':'µg/m3'},
+                  {'literal': 'Presión atmosférica', 'code': 'P','units':'mbar'} ,
+                  {'literal': 'Radiación Solar Total', 'code': 'Rad', 'units':'mw/m2'},
+                  {'literal': 'Radiación Solar Ultravioleta', 'code': 'Rad UV', 'units':'mw/m2'},
+                  {'literal': 'Sulfure de hidrógeno', 'code': 'SH2', 'units':'µg/m3'},
+                  {'literal': 'Temperatura', 'code': 'T', 'units':'ºC'},
+                  {'literal': 'Tolueno C7H8', 'code': 'C7H8', 'units':'µg/m3'},
+                  {'literal': 'Veloc. Viento', 'code': 'VelV', 'units':'m/s'}
+                ]
+        for elem in elements:
+            db.measurement_unit.insert(**elem)
+except:
+    except_data=sys.exc_info()
+    msg="Unexpected error: %s"%except_data[0]
+    pass
