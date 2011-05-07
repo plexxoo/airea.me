@@ -39,7 +39,8 @@ response.menu+=[
     (T('Master'), False, None,
      [(T('Zone'), False, URL(request.application, 'zone', 'index')),
       (T('Province'), False, URL(request.application, 'province', 'index')),
-      (T('Town'), False, URL(request.application, 'town', 'index'))
+      (T('Town'), False, URL(request.application, 'town', 'index')),
+      (T('Station'), False, URL(request.application, 'station', 'index'))
      ]
    )]
 

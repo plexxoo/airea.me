@@ -1,0 +1,6 @@
+{{extend 'layout.html'}}
+<h1>{{=T('Station')}}</h1>
+{{if auser is not None:}}
+<a href="{{=URL(r=request, f='index')}}" >{{=T('List')}}</a> | <a href="{{=URL(r=request, f='create')}}" >{{=T('Create')}}</a> 
+{{pass}}
+{{include}}
