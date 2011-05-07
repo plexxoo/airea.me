@@ -42,11 +42,11 @@ plugins = PluginManager()
 auth.settings.hmac_key = 'sha512:2a6d8cd8-0cbc-49e6-850f-3b6c39fab688'   # before define_tables()
 auth.define_tables()                           # creates all needed tables
 #auth.settings.mailer = mail                    # for user email verification
-auth.settings.registration_requires_verification = False
-auth.settings.registration_requires_approval = False
-auth.messages.verify_email = 'Click on the link http://'+request.env.http_host+URL('default','user',args=['verify_email'])+'/%(key)s to verify your email'
-auth.settings.reset_password_requires_verification = True
-auth.messages.reset_password = 'Click on the link http://'+request.env.http_host+URL('default','user',args=['reset_password'])+'/%(key)s to reset your password'
-auth.settings.actions_disabled = ['profile','change_password','retrieve_username','request_reset_password']
+#auth.settings.registration_requires_verification = False
+#auth.settings.registration_requires_approval = False
+#auth.messages.verify_email = 'Click on the link http://'+request.env.http_host+URL('default','user',args=['verify_email'])+'/%(key)s to verify your email'
+#auth.settings.reset_password_requires_verification = True
+#auth.messages.reset_password = 'Click on the link http://'+request.env.http_host+URL('default','user',args=['reset_password'])+'/%(key)s to reset your password'
+auth.settings.actions_disabled = ['register','profile','change_password','retrieve_username','request_reset_password']
 
 crud.settings.auth = None                      # =auth to enforce authorization on crud

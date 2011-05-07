@@ -30,6 +30,19 @@
 import StringIO
 import sys
 
+# Load administration user
+try:
+    if db(db.auth_user.id >= 1).count() == 0:
+        value=ADMIN_USER        
+        crypt=CRYPT(key=auth.settings.hmac_key)
+        value['password']=crypt(value['password'])[0]
+        db.auth_user.insert(**value)
+except:
+    except_data=sys.exc_info()
+    msg="Unexpected error: %s"%except_data[0]
+    pass   
+
+# Load zone,province,town and station data
 try:
     if db(db.station.id >= 1).count() == 0:
         data=get_url_contents(CVS_URL)

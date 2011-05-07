@@ -40,5 +40,11 @@ APP_URL='%s/%s' %(HOST, request.application)                                    
 # DAL definition
 DB_DAL='sqlite://storage.db'
 
+# Administration user data
+ADMIN_USER={'first_name':'Administrador',
+            'last_name':'Airea.me',
+            'email': 'admin@host.ext',
+            'password': 'admin'}
+
 # Links
 CVS_URL='http://opendata.euskadi.net/w79-contdata/es/contenidos/ds_geograficos/red_calidad_aire/es_opendata/adjuntos/estaciones.csv'
