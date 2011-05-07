@@ -28,8 +28,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 import os
 
-# Base path
-w2p_path=request.env.web2py_path
+# Base path. It is diferent depending if is called from script or web
+if request.env.web2py_path:
+    w2p_path=request.env.web2py_path
+else:
+    w2p_path=os.getcwd()
 
 # Parameters
 W2P_APP_PATH=os.path.join(w2p_path,'applications')                                  #: Web2py applications path
@@ -46,5 +49,11 @@ ADMIN_USER={'first_name':'Administrador',
             'email': 'admin@host.ext',
             'password': 'admin'}
 
+# Configuration file path
+CONFIG_PATH=os.path.join(APP_PATH,'scripts','configuration','config.yaml')
+
 # Links
 CVS_URL='http://opendata.euskadi.net/w79-contdata/es/contenidos/ds_geograficos/red_calidad_aire/es_opendata/adjuntos/estaciones.csv'
+ESTATION_LINK='http://www.ingurumena.ejgv.euskadi.net/r49-n82/es/vima_ai_vigilancia/estaciones.apl?CodZona=@%s&CodEst=%s&lenguaje=c'
+CURRENT_INFO_URL='http://www.ingurumena.ejgv.euskadi.net/r49-n82/es/vima_ai_vigilancia/doc24.apl'
+ESTATION_DATE_LINK='http://www.ingurumena.ejgv.euskadi.net/r49-n82/es/vima_ai_vigilancia/estaciones.apl?CodZona=@%s&codest=%s&Fecha=%s&lenguaje=c'
