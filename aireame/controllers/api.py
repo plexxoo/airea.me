@@ -40,6 +40,12 @@ def last():
     return locals()
 
 @request.restful()
+def seven():
+    def GET(id=None):
+        return rest_station_seven(id)
+    return locals()
+
+@request.restful()
 def quality():
     def GET(id=None,type=None):
         return rest_quality(id,type)

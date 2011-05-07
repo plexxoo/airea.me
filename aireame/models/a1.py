@@ -27,6 +27,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+from gluon.storage import Storage
+
 def get_request_args(expected=None):
     expected_args = []
     arguments = request.args
@@ -341,4 +343,20 @@ def statistical_data_of_station(station_id,date):
     db.commit()
     return averages
 
-
+def get_station_by_code(code):
+    if code is None:
+        return None
+    
+    # Station data
+    query=((db.zone.id==db.station.zone)&(db.town.id==db.station.town)&(db.station.code==code))    
+    row=db(query).select(db.station.id,db.station.identifier,db.station.code,db.station.name,db.station.address,db.town.name,db.zone.code,db.station.latitude,db.station.longitude).first()
+    
+    tmp=Storage()
+    tmp['id']=row.station.identifier
+    tmp['name']=row.station.name
+    tmp['code']=row.station.code
+    tmp['address']="%s - %s"%(row.station.address,row.town.name)
+    tmp['href']=ESTATION_LINK%(row.zone.code,row.station.code)
+    tmp['lat']=row.station.latitude
+    tmp['lon']=row.station.longitude
+    return tmp

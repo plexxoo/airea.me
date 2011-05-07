@@ -53,18 +53,10 @@ def index():
     return dict(data=zones,auser=auth.user)
 
 def current():
-    [code, params] = get_request_args(1)  
-    # Estation data
-    query=((db.zone.id==db.station.zone)&(db.town.id==db.station.town)&(db.station.code==code))    
-    row=db(query).select(db.station.id,db.station.identifier,db.station.code,db.station.name,db.station.address,db.town.name,db.zone.code,db.station.latitude,db.station.longitude).first()
-    
-    tmp=Storage()
-    tmp['id']=row.station.identifier
-    tmp['name']=row.station.name
-    tmp['code']=row.station.code
-    tmp['address']="%s - %s"%(row.station.address,row.town.name)
-    tmp['href']=ESTATION_LINK%(row.zone.code,row.station.code)
-    tmp['lat']=row.station.latitude
-    tmp['lon']=row.station.longitude
-    
-    return dict(station=tmp)
+    [code, params] = get_request_args(1)
+    return dict(station=get_station_by_code(code))
+
+def last_seven():
+    [code, params] = get_request_args(1) 
+    return dict(station=get_station_by_code(code))
+

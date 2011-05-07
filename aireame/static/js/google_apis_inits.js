@@ -97,7 +97,7 @@ var AireaMeGoogleApis = {
 	/* Motion Chart*/
 	getDataMotionChart: function() {
 		$.ajax({
-	    	url: url_base+"/api/statistics.json/LLOD1",
+	    	url: AireaMeGoogleApis.url_base + AireaMeGoogleApis.url_location,
 			dataType: 'json',
 			success: AireaMeGoogleApis.drawMotionChart
 		});

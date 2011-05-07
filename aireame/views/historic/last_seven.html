@@ -1,5 +1,5 @@
 {{extend 'historic/base.html'}} 
-<h2>{{=T('Measurement Station')}}&nbsp;{{=station.name}}&nbsp;-&nbsp;{{=T('Current data')}}</h2>
+<h2>{{=T('Measurement Station')}}&nbsp;{{=station.name}}&nbsp;-&nbsp;{{=T('Last seven days data')}}</h2>
 
 <b>{{=T('Station in')}}</b>:&nbsp;{{=station.name}}&nbsp;{{=A(T('more info.'),_href=station.href,_target="_blank")}}<br />
 {{=station.address}}<br />
@@ -8,10 +8,10 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="{{=URL('static','js/google_apis_inits.js')}}"></script>
 <script type="text/javascript">
-google.load('visualization', '1', {'packages':['corechart']});
+google.load('visualization', '1', {'packages':['motionchart']});
 AireaMeGoogleApis.url_base = "{{=APP_URL}}";
-AireaMeGoogleApis.url_location = "/api/last.json/{{=station.code}}"
-AireaMeGoogleApis.default_width = 600
-google.setOnLoadCallback(AireaMeGoogleApis.getDataLinearChart);
+AireaMeGoogleApis.url_location = "/api/seven.json/{{=station.code}}"
+AireaMeGoogleApis.default_width = 700
+google.setOnLoadCallback(AireaMeGoogleApis.getDataMotionChart);
 </script>
 <div id="chart_div" style="width: 400px; height: 400px;"></div>
