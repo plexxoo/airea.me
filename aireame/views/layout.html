@@ -16,6 +16,10 @@ Description: A two-column, fixed-width and lightweight template ideal for 1024x7
   <title>
    {{=response.title or request.application}}
   </title>
+  
+  {{response.files.append(URL('static','css/superfish.css'))}}
+  {{response.files.append(URL('static','js/superfish.js'))}}
+    
   {{response.files.append(URL(request.application,'static','plugin_layouts/layouts/FlashyWeb/default.css'))}}
   {{response.files.append(URL('static','plugin_layouts/superfish.js'))}}
   {{include 'web2py_ajax.html'}}
