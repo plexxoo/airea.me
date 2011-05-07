@@ -36,6 +36,7 @@ response.menu = [
 ##########################################
 
 response.menu+=[
+    (T('Historic'), False, URL(request.application, 'historic', 'index'),[],),
     (T('Master'), False, None,
      [(T('Zone'), False, URL(request.application, 'zone', 'index')),
       (T('Province'), False, URL(request.application, 'province', 'index')),

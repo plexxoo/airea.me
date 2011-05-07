@@ -27,6 +27,25 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+def get_request_args(expected=None):
+    expected_args = []
+    arguments = request.args
+    
+    if expected is None:
+        expected = len(arguments)
+            
+    for item in range(expected):
+        try:
+            value = request.args(item)
+        except:
+            value = None
+        expected_args.append(value)
+    if expected < len(arguments):
+        expected_args.append(arguments[expected:])
+    else:
+        expected_args.append([])
+    return expected_args
+
 def get_url_contents(url):
     """
     Gets the contents from a given URL.
