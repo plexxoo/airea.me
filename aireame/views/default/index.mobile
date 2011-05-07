@@ -1,0 +1,18 @@
+{{extend 'layout.mobile'}}
+<div data-role="page">
+
+	<div id="main_header" data-theme="b">
+		<br />
+		<center><img src="{{=URL("static", "images/logo.png")}}"></center>
+		
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+	<h2>{{=' '.join(x.capitalize() for x in request.function.split('_'))}}</h2>
+{{if len(response._vars)==1:}}
+{{=response._vars.values()[0]}}
+{{elif len(response._vars)>1:}}
+{{=BEAUTIFY(response._vars)}}
+{{pass}}
+</div><!-- /page -->
