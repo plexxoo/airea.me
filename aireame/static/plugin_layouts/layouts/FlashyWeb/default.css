@@ -17,6 +17,7 @@ body {
 
 h1, h2, h3 {
 	margin: 0;
+	margin-bottom: 20px;
 	text-transform: lowercase;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-weight: normal;
@@ -88,6 +89,7 @@ input, textarea, select {
 	font-size: 13px;
 	color: #333333;
 }
+
 
 #wrapper {
 	background: #7ACF00 url(images/img03.jpg);
@@ -161,7 +163,6 @@ input, textarea, select {
 	display: block;
 	float: left;
 	margin-left: 5px;
-	background: #0094E0;
 	background: #355605 url(../../../images/button_bg.png) repeat-x bottom;
 	border: 1px dashed #FFFFFF;
 	padding: 1px 10px;
@@ -438,6 +439,13 @@ html>body #footer {
 
 /* Tables */
 
+#data_table {
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	background: #ededed;
+	padding: 3px;
+}
+
 #data_table_length, #data_table_filter {
 	margin-top: 10px;
 	padding: 2px 5px;
@@ -448,6 +456,12 @@ html>body #footer {
 	margin-left: 5px;
 }
 
+
+#data_table  table{
+	margin-top: 30px;
+	color: #333;
+}
+
 #data_table_info {
 	width: 150px;
 	font-family: Verdana, sans-serif;
@@ -455,19 +469,36 @@ html>body #footer {
 	color: #666;
 }
 
-#data_table {
+#data_table_paginate {
 	margin-top: 10px;
-	border: 1px solid #ccc;
-	background: #ededed;
-	padding: 3px;
 }
 
-#data_table  table{
-	margin-top: 30px;
-	color: #333;
+span.fg-button {
+	padding: 0px 5px;
+	color: #acacac;
+	cursor: pointer;
+}
+
+span.fg-button:hover {
+	padding: 0px 5px;
+	color: #2a7ca8;
+	text-decoration: underline;
+}
+
+span.previous, span.next, span.first, span.last{
+	padding: 0px 5px;
+	cursor: pointer;
+	color: #2a7ca8;
+	text-decoration: underline;
+}
+
+span.previous:hover, span.next:hover, span.first:hover, span.last:hover {
+	text-decoration: none;
+	color: #0094E0;
 }
 
 /* Botonera superior derecha */
 .auth_navbar a {
 	color: #fff;
+
 }
