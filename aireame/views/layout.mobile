@@ -7,11 +7,37 @@
 	<link rel="stylesheet"  href="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.min.css')}}" />  
 	    {{#------ include web2py specific js code (jquery, calendar, form stuff) ------}}
 	    {{include 'web2py_ajax.html'}}
-	<script type="text/javascript" src="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.min.js')}}"></script>
-
+	<script type="text/javascript" src="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.js')}}"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 </head> 
 <body> 
 {{include}}
+
+<script type="text/javascript" src="{{=URL('static','js/google_apis_inits.js')}}"></script>
+<script>
+$('.page-map').live("pagecreate", function() {
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position){
+					AireaMeGoogleApis.initializeMap(position.coords.latitude,position.coords.longitude);
+				});
+			}
+	});
+
+google.load('visualization', '1', {'packages':['motionchart']});
+$('.page-motion-chart').live("pagecreate", function() {
+	AireaMeGoogleApis.getDataMotionChart();
+});
+
+
+google.load('visualization', '1', {'packages':['corechart']});
+$('.page-linear-chart').live("pagecreate", function() {	
+	AireaMeGoogleApis.getMobileDataLinearChart();
+});
+
+
+
+</script>
 </body>
 </html>
 

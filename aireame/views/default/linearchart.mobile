@@ -1,0 +1,13 @@
+<div data-role="page" data-fetch='always' data-theme="b" class="page-linear-chart" style="width:100%; height:100%;">
+	<div data-role="header">
+		<h1>{{=T('Graphic')}}</h1>
+		<a href="{{=URL(r=request, c="default", f="index")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div>
+	<div data-role="content" style="width:100%; height:100%; padding:0;"> 
+		<div id="chart_div" style="width:100%; height:100%;"></div>
+	</div>
+	<script>
+	AireaMeGoogleApis.url_location = "/api/last.json/PUYO";
+	$('.page-linear-chart').live('pagehide',function(){ $(this).remove(); });
+	</script>
+</div>

@@ -31,6 +31,13 @@ def index():
 
     return dict(message=response.view)
 
+def map():
+    return dict()
+
+def linearchart():
+    return dict()
+
+
 def user():
     """
     exposes:
