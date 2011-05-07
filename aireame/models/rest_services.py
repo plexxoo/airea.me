@@ -27,24 +27,24 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-crud.settings.create_next = URL('index')
-crud.settings.delete_next = URL('index')
-crud.settings.update_next = URL('index')
-
-import datetime
-
-def index(): 
-    db.station.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
-    form = crud.select(db.station, fields = ['station.id', 'station.identifier',  'station.zone',  'station.province',  'station.town',  'station.name',  'station.code',  'station.address',  'station.latitude',  'station.longitude', ], headers = {'station.id': T("Actions"), 'station.identifier': 'Identifier',  'station.zone': 'Zone',  'station.province': 'Province',  'station.town': 'Town',  'station.name': 'Name',  'station.code': 'Code',  'station.address': 'Address',  'station.latitude': 'Latitude',  'station.longitude': 'Longitude', })
-    return dict(form=form,auser=auth.user)
-
-@auth.requires_login()
-def create():
-    return dict(form=crud.create(db.station),auser=auth.user)
-
-@auth.requires_login()
-def update():
-    return dict(form=crud.update(db.station, request.args(0)),auser=auth.user)
-        
-def read():
-    return dict(form=crud.read(db.station, request.args(0)),auser=auth.user)
+def rest_station_get(code=None):
+    data={}
+    query=((db.zone.id==db.station.zone)&(db.town.id==db.station.town))
+    if code is not None:
+        query=query&(db.station.code==code)
+    else:
+        query=query&(db.station.id>0)
+    
+    rows=db(query).select(db.station.id,db.station.identifier,db.station.code,db.station.name,db.station.address,db.town.name,db.zone.code,db.station.latitude,db.station.longitude)
+    num=1
+    for row in rows:
+        tmp={}
+        tmp['id']=row.station.identifier
+        tmp['name']=row.station.name
+        tmp['address']="%s - %s"%(row.station.address,row.town.name)
+        tmp['external_url']=ESTATION_LINK%(row.zone.code,row.station.code)
+        tmp['lat']=row.station.latitude
+        tmp['lon']=row.station.longitude
+        data[num]=tmp
+        num+=1        
+    return data

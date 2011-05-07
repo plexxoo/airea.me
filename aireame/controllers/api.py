@@ -27,24 +27,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-crud.settings.create_next = URL('index')
-crud.settings.delete_next = URL('index')
-crud.settings.update_next = URL('index')
-
-import datetime
-
-def index(): 
-    db.station.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
-    form = crud.select(db.station, fields = ['station.id', 'station.identifier',  'station.zone',  'station.province',  'station.town',  'station.name',  'station.code',  'station.address',  'station.latitude',  'station.longitude', ], headers = {'station.id': T("Actions"), 'station.identifier': 'Identifier',  'station.zone': 'Zone',  'station.province': 'Province',  'station.town': 'Town',  'station.name': 'Name',  'station.code': 'Code',  'station.address': 'Address',  'station.latitude': 'Latitude',  'station.longitude': 'Longitude', })
-    return dict(form=form,auser=auth.user)
-
-@auth.requires_login()
-def create():
-    return dict(form=crud.create(db.station),auser=auth.user)
-
-@auth.requires_login()
-def update():
-    return dict(form=crud.update(db.station, request.args(0)),auser=auth.user)
-        
-def read():
-    return dict(form=crud.read(db.station, request.args(0)),auser=auth.user)
+@request.restful()
+def station():
+    def GET(id=None):
+        return rest_station_get(id)
+    return locals()
