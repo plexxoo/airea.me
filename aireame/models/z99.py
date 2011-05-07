@@ -6,7 +6,7 @@ if request.env.http_user_agent:
     is_mobile = detect.detect_mobile_browser(request.env.http_user_agent)
     #forzar vista movil:
     #is_mobile = True
-    if is_mobile:
+    if is_mobile and request.extension == "html" :
         #Es un movil             
         response.view = "%s/%s.%s" % (request.controller, request.function, "mobile")
         if not os.path.exists(os.path.join(request.folder, 'views', request.controller, request.function+".mobile")):
