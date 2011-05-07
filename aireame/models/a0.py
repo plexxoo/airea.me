@@ -57,3 +57,6 @@ CVS_URL='http://opendata.euskadi.net/w79-contdata/es/contenidos/ds_geograficos/r
 ESTATION_LINK='http://www.ingurumena.ejgv.euskadi.net/r49-n82/es/vima_ai_vigilancia/estaciones.apl?CodZona=@%s&CodEst=%s&lenguaje=c'
 CURRENT_INFO_URL='http://www.ingurumena.ejgv.euskadi.net/r49-n82/es/vima_ai_vigilancia/doc24.apl'
 ESTATION_DATE_LINK='http://www.ingurumena.ejgv.euskadi.net/r49-n82/es/vima_ai_vigilancia/estaciones.apl?CodZona=@%s&codest=%s&Fecha=%s&lenguaje=c'
+
+# Parameters
+QUALITY_ELEMENTS=['MP2.5','MP10','O3','NO2','SO2']

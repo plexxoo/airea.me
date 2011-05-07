@@ -48,3 +48,59 @@ def rest_station_get(code=None):
         data[num]=tmp
         num+=1        
     return data
+
+def rest_station_last(code=None,ca=False):
+    # Data
+    data={}
+    if code is None:
+        return data
+        
+    # CA elements: Elementos para calidad del aire
+    ca_elems=QUALITY_ELEMENTS
+    
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+
+    # Get Values
+    query=(db.measurement.measurement_date==today)&(db.measurement.station==db.station.id)&(db.station.code==code)
+    rows=db(query).select(db.measurement.id,db.measurement.element,db.measurement.measurement_hour,db.measurement.value,orderby="measurement.element ASC,measurement.measurement_hour ASC")
+    elements={}
+    for row in rows:
+        if ca:
+            if (row.element in ca_elems) is False:
+                continue
+        if (row.element in elements.keys()) is False:
+            elements[row.element]={}
+        elements[row.element][row.measurement_hour]=row.value
+    values={}
+    for index in range(1,25):
+        values[index]=[]
+    
+    for item in elements.keys():
+        elem=elements[item]
+        for index in range(1,25):
+            values[index].append(elem[index])
+            
+    data['values']=values
+    data['columns']=elements.keys()
+        
+    return data
+
+
+def rest_quality(code=None,type=None):
+    # Data
+    data={}
+    if code is None:
+        return data
+    if type is None:
+        type='current'
+        
+    if type=='current':
+        return rest_station_last(code,True)
+    else:
+        return data

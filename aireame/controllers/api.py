@@ -32,3 +32,15 @@ def station():
     def GET(id=None):
         return rest_station_get(id)
     return locals()
+
+@request.restful()
+def last():
+    def GET(id=None):
+        return rest_station_last(id)
+    return locals()
+
+@request.restful()
+def quality():
+    def GET(id=None,type=None):
+        return rest_quality(id,type)
+    return locals()
