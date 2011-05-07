@@ -35,7 +35,7 @@ import datetime
 
 def index(): 
     db.station.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
-    form = crud.select(db.station, fields = ['station.id', 'station.identifier',  'station.zone',  'station.province',  'station.town',  'station.name',  'station.code',  'station.address',  'station.latitude',  'station.longitude', ], headers = {'station.id': T("Actions"), 'station.identifier': 'Identifier',  'station.zone': 'Zone',  'station.province': 'Province',  'station.town': 'Town',  'station.name': 'Name',  'station.code': 'Code',  'station.address': 'Address',  'station.latitude': 'Latitude',  'station.longitude': 'Longitude', })
+    form = crud.select(db.station, fields = ['station.id', 'station.name',  'station.code',  'station.address',  'station.latitude',  'station.longitude', ], headers = {'station.id': T("Actions"),  'station.name': 'Name',  'station.code': 'Code',  'station.address': 'Address',  'station.latitude': 'Latitude',  'station.longitude': 'Longitude', })
     return dict(form=form,auser=auth.user)
 
 @auth.requires_login()
