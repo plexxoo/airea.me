@@ -21,6 +21,7 @@ h1, h2, h3 {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-weight: normal;
 	color: #3cb1f0;
+	border-bottom: 1px dashed #D1D1D1;
 }
 
 h1 {
@@ -112,6 +113,7 @@ input, textarea, select {
 	margin: 0;
 	font-size: 38px;
 	color: #0099E8;
+	border: none;
 }
 
 #logo h1 sup {
@@ -434,3 +436,38 @@ html>body #footer {
 	padding-left: 0;
 }
 
+/* Tables */
+
+#data_table_length, #data_table_filter {
+	margin-top: 10px;
+	padding: 2px 5px;
+	color: #54840f;
+}
+
+#data_table_length {
+	margin-left: 5px;
+}
+
+#data_table_info {
+	width: 150px;
+	font-family: Verdana, sans-serif;
+	font-size: 10px;
+	color: #666;
+}
+
+#data_table {
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	background: #ededed;
+	padding: 3px;
+}
+
+#data_table  table{
+	margin-top: 30px;
+	color: #333;
+}
+
+/* Botonera superior derecha */
+.auth_navbar a {
+	color: #fff;
+}
