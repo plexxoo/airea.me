@@ -9,10 +9,17 @@
 
 	<div data-role="content">
 
+	<ul data-role="listview" data-inset="true" data-theme="b" data-dividertheme="c">
+		
+		<li><a href="{{=URL(r=request, c="default", f="map")}}/">{{=T('Map')}}</a></li>
+	
+	</ul>
+
 	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
-			<li data-role="list-divider">Overview</li>
-			<li><a href="{{=URL(r=request, c="default", f="map")}}/">{{=T('Map')}}</a></li>
-			<li><a href="{{=URL(r=request, c="default", f="linearchart")}}/" onclick="$(document.getElementById($(this).attr('href'))).remove();">{{=T('Linear')}}</a></li>
+			<li data-role="list-divider">Ver datos por</li>
+			<li><a href="{{=URL(r=request, c="default", f="linearchart")}}/">{{=T('Station')}}</a></li>
+			<li><a href="{{=URL(r=request, c="default", f="linearchart")}}/">{{=T('Area')}}</a></li>
+			<li data-role="list-divider"></li>
 		</ul>
 
 </div><!-- /page -->
