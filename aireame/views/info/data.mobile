@@ -1,0 +1,11 @@
+<div data-role="page" data-theme="c">
+	<div data-role="header" data-theme="e">
+	<h1>Interpretación de los datos</h1>
+		<a href="{{=URL(r=request, c="default")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div>
+	<div data-role="content"> 
+	Segun la OMS....		
+	</div>
+</div>
+
+
