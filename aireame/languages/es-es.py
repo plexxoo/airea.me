@@ -111,6 +111,7 @@
 'Map': 'Mapa',
 'Master': 'Maestro',
 'Measurement Station': 'Estación de Medida',
+'Measurement Station by Name': 'Medición de estación por nombre',
 'Measurement Station by Zone': 'Medición de la estación por zona',
 'Menu Model': 'Modelo "menu"',
 'Models': 'Modelos',
