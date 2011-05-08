@@ -1,7 +1,7 @@
 {{extend 'historic/base.html'}} 
 <h2>{{=T('Measurement Station by Zone')}}</h2>
 <ul>
-{{for zone in data.keys():}}
+{{for zone in sorted(data.keys()):}}
 <li>{{=zone}}
 <ul>
 {{for station in data[zone]:}}

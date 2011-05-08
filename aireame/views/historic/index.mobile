@@ -7,7 +7,7 @@
 
 	<div data-role="content">
 		<ul data-role="listview" data-filter="true">
-				{{for zone in data.keys():}}
+				{{for zone in sorted(data.keys()):}}
 				<li data-role="list-divider">{{=zone}}</li>
 				{{for station in data[zone]:}}
 				<li>{{=A(station.name,_href=URL(request.application,'historic','current',args=[station.code])+"/")}}</li>
