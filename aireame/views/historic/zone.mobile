@@ -15,5 +15,7 @@
 				<li>{{=A(station.name+" (OMS)",_href=URL(request.application,'historic','current',args=[station.code,'quality'])+"/")}}</li>
 				{{pass}}
 				{{pass}}
-				{{pass}}	
+				{{pass}}
+		</ul>
+	</div>	
 </div><!-- /page -->

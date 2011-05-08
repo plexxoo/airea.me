@@ -7,10 +7,17 @@
 
 	<div data-role="content">
 		<ul data-role="listview" data-filter="true">
-				{{for station in data[zone]:}}
+				{{first = ""}}
+				{{for station in data:}}
+				{{if first != station.name[0].capitalize():}}
+				{{first = station.name[0].capitalize()}}
+				<li data-role="list-divider">{{=first}}</li>
+				{{pass}}
 				<li>{{=A(station.name,_href=URL(request.application,'historic','current',args=[station.code])+"/")}}</li>
 				{{if station.ca:}}
 				<li>{{=A(station.name+" (OMS)",_href=URL(request.application,'historic','current',args=[station.code,'quality'])+"/")}}</li>
 				{{pass}}
 				{{pass}}
+		</ul>
+	</div>
 </div><!-- /page -->

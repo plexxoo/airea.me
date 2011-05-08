@@ -17,8 +17,8 @@
 
 	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
 			<li data-role="list-divider">Ver datos por</li>
-			<li><a href="{{=URL(r=request, c="default", f="linearchart")}}/">{{=T('Station')}}</a></li>
-			<li><a href="{{=URL(r=request, c="historic", f="index")}}/">{{=T('Area')}}</a></li>
+			<li><a href="{{=URL(r=request, c="historic", f="station")}}/">{{=T('Station')}}</a></li>
+			<li><a href="{{=URL(r=request, c="historic", f="zone")}}/">{{=T('Area')}}</a></li>
 			<li data-role="list-divider"></li>
 		</ul>
 
