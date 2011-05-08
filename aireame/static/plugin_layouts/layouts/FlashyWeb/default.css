@@ -13,6 +13,8 @@ body {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #6D6D6D;
+color: #4d4d4d;
+
 }
 
 h1, h2, h3 {
@@ -505,7 +507,6 @@ span.previous:hover, span.next:hover, span.first:hover, span.last:hover {
 /* Botonera superior derecha */
 .auth_navbar a {
 	color: #fff;
-	border:1px solid #ccc;
 }
 
 /* Legenda */
