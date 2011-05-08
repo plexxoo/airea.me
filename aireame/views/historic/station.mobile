@@ -1,0 +1,16 @@
+<div data-role="page">
+
+	<div data-role="header" data-theme="b">
+		<h1>{{=T('Measurement Station by Name')}}</h1>
+		<a href="{{=URL(r=request, c="default")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<ul data-role="listview" data-filter="true">
+				{{for station in data[zone]:}}
+				<li>{{=A(station.name,_href=URL(request.application,'historic','current',args=[station.code])+"/")}}</li>
+				{{if station.ca:}}
+				<li>{{=A(station.name+" (OMS)",_href=URL(request.application,'historic','current',args=[station.code,'quality'])+"/")}}</li>
+				{{pass}}
+				{{pass}}
+</div><!-- /page -->

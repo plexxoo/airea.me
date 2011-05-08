@@ -38,6 +38,8 @@ def rest_station_get(code=None):
     rows=db(query).select(db.station.id,db.station.identifier,db.station.code,db.station.name,db.station.address,db.town.name,db.zone.code,db.station.latitude,db.station.longitude)
     num=1
     for row in rows:
+        station_elements=get_station_ca_elements(row.station.code)
+        #if len(station_elements) > 0:
         tmp={}
         tmp['id']=row.station.identifier
         tmp['name']=row.station.name
@@ -45,6 +47,10 @@ def rest_station_get(code=None):
         tmp['external_url']=ESTATION_LINK%(row.zone.code,row.station.code)
         tmp['lat']=row.station.latitude
         tmp['lon']=row.station.longitude
+        if len(station_elements)==0:
+            tmp['level']=0
+        else:            
+            tmp['level']=get_station_ca_level(row.station.code)
         data[num]=tmp
         num+=1        
     return data

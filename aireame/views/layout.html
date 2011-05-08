@@ -73,14 +73,13 @@ div.error { background-color: red; color: white; padding: 3px; }
      <li>
       <h2><strong>Men&uacute;</strong> principal</h2>
       <ul>
-       <li><a href="#">Inicio</a></li>
-       <li><a href="#">Ver datos por:</a>
+       <li><a href="{{=URL(r=request, c="default", f="index")}}">Inicio</a></li>
+       <li>Ver datos por:
 		<ul>
-			<li>Zona</li>
-			<li>Estaci&oacute;n</li>
+			<li><a href="{{=URL(r=request, c="historic", f="zone")}}">Zona</a></li>
+			<li><a href="{{=URL(r=request, c="historic", f="station")}}">Estaci&oacute;n</a></li>
 		</ul>
        </li>
-       <li><a href="#">Hist&oacute;rico</a></li>
       </ul>
      </li>
      <li>

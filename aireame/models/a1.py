@@ -352,7 +352,8 @@ def get_station_by_code(code):
     row=db(query).select(db.station.id,db.station.identifier,db.station.code,db.station.name,db.station.address,db.town.name,db.zone.code,db.station.latitude,db.station.longitude).first()
     
     tmp=Storage()
-    tmp['id']=row.station.identifier
+    tmp['id']=row.station.id
+    tmp['ident']=row.station.identifier
     tmp['name']=row.station.name
     tmp['code']=row.station.code
     tmp['address']="%s - %s"%(row.station.address,row.town.name)
@@ -391,4 +392,59 @@ def get_station_ca_elements(code):
             
     return elements
     
+def get_station_ca_level(code):
+    # Get station
+    station=get_station_by_code(code)
     
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+
+    # Get Values
+    query=(db.daily_statistics.statistic_date==today)&(db.daily_statistics.station==station.id)
+    rows=db(query).select(db.daily_statistics.element,db.daily_statistics.statistic_date,db.daily_statistics.value,orderby="daily_statistics.element ASC")
+    
+    ca_elements={}
+    for row in rows:
+        if row.element in QUALITY_ELEMENTS:
+            ca_elements[row.element]=row.value
+            
+    if len(ca_elements.keys()) > 0:
+        return calculate_ca(ca_elements)
+    else:
+        return 0
+    
+def calculate_ca(elements):
+    import math
+    indexes=[]
+    for elem in elements:
+        if elem=='MP2.5':
+            indexes.append(_get_level(elements[elem],25,15))
+        elif elem=='MP10':
+            indexes.append(_get_level(elements[elem],50,20))
+        elif elem=='O3':
+            indexes.append(_get_level(elements[elem],100,50))
+        elif elem=='NO2':
+            indexes.append(_get_level(elements[elem],200,100))
+        elif elem=='SO2':
+            indexes.append(_get_level(elements[elem],20,10))
+    
+    index=0
+    for item in indexes:
+        index+=item
+        
+    return math.ceil(index/len(indexes))
+        
+    
+def _get_level(value,max,min):
+    if value >= max:
+        return 3
+    elif value >= min:
+        return 2
+    else:
+        return 1
+                                        

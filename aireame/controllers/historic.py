@@ -59,6 +59,59 @@ def index():
         
     return dict(data=zones,auser=auth.user)
 
+def zone():
+    # Select data
+    rows=db((db.zone.id==db.station.zone)&(db.station.id>=0)).select(db.station.id,db.station.name,db.zone.code,db.zone.name,db.station.code,orderby="zone.name ASC,station.name ASC")
+    zones={}
+    cur_zone=None
+    zone=None
+    for row in rows:
+        if cur_zone != row.zone.name:
+            if zone is not None:
+                zones[cur_zone]=zone
+            zone=[]
+            cur_zone = row.zone.name
+            
+        tmp=Storage()
+        tmp['id']=row.station.id
+        tmp['zone']=row.zone.name
+        tmp['name']=row.station.name
+        tmp['code']=row.station.code
+        tmp['href']=ESTATION_LINK%(row.zone.code,row.station.code)
+            
+        ca_elems=get_station_ca_elements(row.station.code)
+        if len(ca_elems)>0:
+            tmp['ca']=True
+        else:            
+            tmp['ca']=False
+        
+        zone.append(tmp)
+        
+    return dict(data=zones,auser=auth.user)
+
+def station():
+    # Select data
+    rows=db((db.zone.id==db.station.zone)&(db.station.id>=0)).select(db.station.id,db.station.name,db.zone.code,db.zone.name,db.station.code,orderby="station.name ASC")
+    
+    station=[]
+    for row in rows:                    
+        tmp=Storage()
+        tmp['id']=row.station.id
+        tmp['zone']=row.zone.name
+        tmp['name']=row.station.name
+        tmp['code']=row.station.code
+        tmp['href']=ESTATION_LINK%(row.zone.code,row.station.code)
+            
+        ca_elems=get_station_ca_elements(row.station.code)
+        if len(ca_elems)>0:
+            tmp['ca']=True
+        else:            
+            tmp['ca']=False
+        
+        station.append(tmp)
+        
+    return dict(data=station,auser=auth.user)
+
 def current():
     [code,ca,params] = get_request_args(2)
     ca_type=None

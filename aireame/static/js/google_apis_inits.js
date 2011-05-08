@@ -45,6 +45,7 @@ var AireaMeGoogleApis = {
 	maps_link : new Array(),
 	maps_latitude : new Array(),
 	maps_longitude : new Array(),
+	maps_level : new Array(),
 
 	
 	/* Map */
@@ -66,6 +67,7 @@ var AireaMeGoogleApis = {
 			AireaMeGoogleApis.maps_link[key]=val.external_url;
 			AireaMeGoogleApis.maps_latitude[key]=val.lat
 			AireaMeGoogleApis.maps_longitude[key]=val.lon
+			AireaMeGoogleApis.maps_level[key]=val.level
 		});
 		AireaMeGoogleApis.startMap();
 	},
@@ -129,11 +131,12 @@ var AireaMeGoogleApis = {
 	    //add markers:
 	    $.each(AireaMeGoogleApis.maps_latitude, function(index,value){
 	    	if(index > 0){
+	    		var icon_path = AireaMeGoogleApis.url_base+"/static/images/molino_"+AireaMeGoogleApis.maps_level[index]+".png"
 	    		var marker = new google.maps.Marker({  
 	    			  position: new google.maps.LatLng(AireaMeGoogleApis.maps_latitude[index], AireaMeGoogleApis.maps_longitude[index]), 
 	    			  map: map,  
 	    			  title: AireaMeGoogleApis.maps_estacion[index],
-	    			  icon: AireaMeGoogleApis.url_base+"/static/images/molinillo.png"
+	    			  icon: icon_path //AireaMeGoogleApis.url_base+"/static/images/molinillo.png"
 	    		});
 	    		
 	    		//aniadir evento click al marcador	    		
