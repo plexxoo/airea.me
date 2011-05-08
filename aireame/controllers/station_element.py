@@ -31,7 +31,7 @@ crud.settings.create_next = URL('index')
 crud.settings.delete_next = URL('index')
 crud.settings.update_next = URL('index')
 
-
+@auth.requires_login()
 def index(): 
     db.station_element.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
     form = crud.select(db.station_element, fields = ['station_element.id', 'station_element.station',  'station_element.code', ], headers = {'station_element.id': T("Actions"), 'station_element.station': 'Station',  'station_element.code': 'Element', })
@@ -44,6 +44,7 @@ def create():
 @auth.requires_login()
 def update():
     return dict(form=crud.update(db.station_element, request.args(0)),auser=auth.user)
-   
+ 
+@auth.requires_login()  
 def read():
     return dict(form=crud.read(db.station_element, request.args(0)),auser=auth.user)

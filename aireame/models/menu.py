@@ -21,7 +21,8 @@ response.meta.copyright = 'Copyright 2011'
 ##########################################
 
 response.menu = [
-    (T('Home'), False, URL('default','index'), [])
+    (T('Home'), False, URL('default','index'), []),
+    (T('Historic'), False, URL(request.application, 'historic', 'index'),[])
     ]
 
 ##########################################
@@ -35,8 +36,7 @@ response.menu = [
 ## Make your own menus
 ##########################################
 
-response.menu+=[
-    (T('Historic'), False, URL(request.application, 'historic', 'index'),[],),
+admin_menu=[
     (T('Master'), False, None,
      [(T('Zone'), False, URL(request.application, 'zone', 'index')),
       (T('Province'), False, URL(request.application, 'province', 'index')),
@@ -47,3 +47,5 @@ response.menu+=[
      ]
    )]
 
+if auth.user:
+    response.menu+=admin_menu

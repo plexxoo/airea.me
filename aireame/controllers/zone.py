@@ -31,7 +31,7 @@ crud.settings.create_next = URL('index')
 crud.settings.delete_next = URL('index')
 crud.settings.update_next = URL('index')
 
-
+@auth.requires_login()
 def index(): 
     db.zone.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
     form = crud.select(db.zone, fields = ['zone.id', 'zone.name',  'zone.code', ], headers = {'zone.id': T("Actions"), 'zone.name': 'Name',  'zone.code': 'Code', })
@@ -45,6 +45,7 @@ def create():
 @auth.requires_login()
 def update():
     return dict(form=crud.update(db.zone, request.args(0)),auser=auth.user)
-        
+ 
+@auth.requires_login()       
 def read():
     return dict(form=crud.read(db.zone, request.args(0)),auser=auth.user)

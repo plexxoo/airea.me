@@ -33,6 +33,7 @@ crud.settings.update_next = URL('index')
 
 import datetime
 
+@auth.requires_login()
 def index(): 
     db.station.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
     form = crud.select(db.station, fields = ['station.id', 'station.name',  'station.code',  'station.address',  'station.latitude',  'station.longitude', ], headers = {'station.id': T("Actions"),  'station.name': 'Name',  'station.code': 'Code',  'station.address': 'Address',  'station.latitude': 'Latitude',  'station.longitude': 'Longitude', })
@@ -45,6 +46,7 @@ def create():
 @auth.requires_login()
 def update():
     return dict(form=crud.update(db.station, request.args(0)),auser=auth.user)
-        
+      
+@auth.requires_login()  
 def read():
     return dict(form=crud.read(db.station, request.args(0)),auser=auth.user)
