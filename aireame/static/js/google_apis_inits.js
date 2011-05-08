@@ -71,6 +71,10 @@ var AireaMeGoogleApis = {
 	},
 	
 	startMap: function(){
+		//mostrar Loading si estamos en mobile
+		if(AireaMeGoogleApis.is_mobile){
+			$.mobile.pageLoading();
+		}
 		var latlng = new google.maps.LatLng(43, -2.59); //lat,lng de pais vasco
 		var myOptions = {
 			zoom: 8,
@@ -90,8 +94,31 @@ var AireaMeGoogleApis = {
 	    			  position: new google.maps.LatLng(AireaMeGoogleApis.maps_latitude[index], AireaMeGoogleApis.maps_longitude[index]), 
 	    			  map: map  
 	    		});
-	    	}
+	    		
+	    		//aniadir evento click al marcador	    		
+	    		if(AireaMeGoogleApis.is_mobile){
+		    		//en caso de movil, abrioms un dialogo nuevo
+		    		google.maps.event.addListener(marker, 'click', function() {
+		    			$.mobile.changePage(AireaMeGoogleApis.url_base+"/default/prueba/");
+		    		  });
+	    		} else {
+	    			//en caso de navegador normal:
+	    			
+	    			//TODO: crear contentString desde ajax
+	    			//var contentString = "";
+	    			//Creamos el contentString
+	    			var infowindow = new google.maps.InfoWindow({
+	    			    content: contentString
+	    			});
+
+	    			google.maps.event.addListener(marker, 'click', function() {
+	    			  infowindow.open(map,marker);
+	    			});
+	    		};
+
+	    	};
 	    });
+	    $.mobile.pageLoading (true);
 	},
 	
 	/* Motion Chart*/

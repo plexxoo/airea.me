@@ -37,6 +37,8 @@ def map():
 def linearchart():
     return dict()
 
+def prueba():
+    return dict()
 
 def user():
     """
