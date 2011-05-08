@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
     <title>{{=response.title or request.application}}</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="{{=URL(request.application,'static','images/favicon.ico')}}">
+  <link rel="apple-touch-icon" href="{{=URL(request.application,'static','images/favicon.png')}}">
+    
     <link rel="stylesheet"  href="{{=URL('static','css/custom_mobile.css')}}" />
 	<link rel="stylesheet"  href="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.min.css')}}" />  
 	    {{#------ include web2py specific js code (jquery, calendar, form stuff) ------}}
