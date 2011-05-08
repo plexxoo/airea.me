@@ -1,6 +1,6 @@
 <div data-role="page" data-fetch='always' data-theme="b" class="page-linear-chart" style="width:100%; height:100%;">
 	<div data-role="header">
-		<h1>{{=station.name}}</h1>
+		<h1>{{=station.name}}{{if ca_type:}} (OMS){{pass}}</h1>
 		<a href="{{=URL(r=request, c="default", f="index")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div>
 	<div data-role="content" style="width:100%; height:100%; padding:0;"> 
@@ -18,7 +18,7 @@
 	AireaMeGoogleApis.url_location = "/api/last.json/{{=station.code}}"
 	{{pass}}
 	</script>
-	<div data-role="footer" data-id="{{=station.code}}" data-theme="a">
+	<div data-role="footer" data-id="{{=station.code}}" data-theme="a" data-position="fixed">
 	<div data-role="navbar">
 			<ul>
 				{{if not ca_type:}}				
