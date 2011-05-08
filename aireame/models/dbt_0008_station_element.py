@@ -3,8 +3,8 @@
 #
 # Copyright 2011 Plexxoo Interactiva S.L.
 # Copyright Daniel Gonzalez     <demetrio@plexxoo.com>
-# Copyright Jon Latorre         <moebius@plexxoo.com>
 # Copyright Silvia Martín       <smartin@plexxoo.com>
+# Copyright Jon Latorre         <moebius@plexxoo.com>
 # Copyright Jesus Martinez      <jamarcer@plexxoo.com>
 #
 # Este fichero se distribuye bajo la licencia GPL según las
@@ -27,10 +27,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-db.define_table('daily_statistics',
+db.define_table('station_element',
     Field('station', 'reference station', label=T('Station')),
-    Field('element', 'string', length=10, label=T('Element')),
-    Field('statistic_date', 'date', label=T('Date')),
-    Field('value', 'double', label=T('Value')),
+    Field('code', 'string', length=20, label=T('Element')),
     format='')
 

@@ -149,3 +149,21 @@ except:
     except_data=sys.exc_info()
     msg="Unexpected error: %s"%except_data[0]
     pass
+
+# Station elements
+
+# Load zone,province,town and station data
+try:
+    if db(db.station_element.id >= 1).count() == 0:
+        input=open(os.path.join(APP_PATH,'scripts','station_element.txt'))
+        (cols, rows) = parse_csv(input,',')
+        
+        for row in rows:  
+            station=get_station_by_code(row['code'])    
+            value= { 'station': station.id,
+                     'code': row['element']}
+            db.station_element.insert(**value)
+except:
+    except_data=sys.exc_info()
+    msg="Unexpected error: %s"%except_data[0]
+    pass

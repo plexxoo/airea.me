@@ -3,8 +3,8 @@
 #
 # Copyright 2011 Plexxoo Interactiva S.L.
 # Copyright Daniel Gonzalez     <demetrio@plexxoo.com>
-# Copyright Jon Latorre         <moebius@plexxoo.com>
 # Copyright Silvia Martín       <smartin@plexxoo.com>
+# Copyright Jon Latorre         <moebius@plexxoo.com>
 # Copyright Jesus Martinez      <jamarcer@plexxoo.com>
 #
 # Este fichero se distribuye bajo la licencia GPL según las
@@ -27,10 +27,23 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-db.define_table('daily_statistics',
-    Field('station', 'reference station', label=T('Station')),
-    Field('element', 'string', length=10, label=T('Element')),
-    Field('statistic_date', 'date', label=T('Date')),
-    Field('value', 'double', label=T('Value')),
-    format='')
+crud.settings.create_next = URL('index')
+crud.settings.delete_next = URL('index')
+crud.settings.update_next = URL('index')
 
+
+def index(): 
+    db.station_element.id.represent = lambda id: DIV(A(T("Edit"), _href=URL(r=request, f='update', args=(id)))," ",  A(T("Show"), _href=URL(r=request, f='read', args=(id))))
+    form = crud.select(db.station_element, fields = ['station_element.id', 'station_element.station',  'station_element.code', ], headers = {'station_element.id': T("Actions"), 'station_element.station': 'Station',  'station_element.code': 'Element', })
+    return dict(form=form,auser=auth.user)
+
+@auth.requires_login()
+def create():
+    return dict(form=crud.create(db.station_element),auser=auth.user)
+
+@auth.requires_login()
+def update():
+    return dict(form=crud.update(db.station_element, request.args(0)),auser=auth.user)
+   
+def read():
+    return dict(form=crud.read(db.station_element, request.args(0)),auser=auth.user)
