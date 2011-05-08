@@ -1,5 +1,5 @@
 {{extend 'layout.mobile'}}
-<div data-role="page">
+<div data-role="page" class="main_page">
 
 	<div id="main_header" data-theme="b">
 		<br />
