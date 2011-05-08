@@ -21,5 +21,14 @@
 			<li><a href="{{=URL(r=request, c="historic", f="zone")}}/">{{=T('Area')}}</a></li>
 			<li data-role="list-divider"></li>
 		</ul>
+		
+	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="e">
+			<li data-role="list-divider">Mas informaci&oacute;n</li>
+			<li><a href="{{=URL(r=request, c="corporative", f="field")}}/">{{=T('Geographic Scope')}}</a></li>
+			<li><a href="{{=URL(r=request, c="info", f="air_quality")}}/">{{=T('Air Quality')}}</a></li>
+			<li><a href="{{=URL(r=request, c="info", f="data")}}/">{{=T('Data interpretation')}}</a></li>
+			<li data-role="list-divider"></li>
+		</ul>
+		
 
 </div><!-- /page -->
