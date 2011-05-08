@@ -143,22 +143,29 @@ var AireaMeGoogleApis = {
 	    		if(AireaMeGoogleApis.is_mobile){
 		    		//en caso de movil, abrioms un dialogo nuevo
 		    		google.maps.event.addListener(marker, 'click', function() {
-		    			$.mobile.changePage(AireaMeGoogleApis.url_base+"/default/prueba/");
+		    			$.mobile.changePage(AireaMeGoogleApis.url_base+"/historic/current2/"+AireaMeGoogleApis.maps_estacion[index]+"/");
 		    		  });
 	    		} else {
 	    			//en caso de navegador normal:
-	    			
+	    			$.ajax({
+	    		    	url: AireaMeGoogleApis.url_base +"/historic/current.load/"+AireaMeGoogleApis.maps_estacion[index]+"/",
+	    				dataType: 'html',
+	    				success: function(htmldata){
+	    				
+		    				var contentString = htmldata;
+			    			//Creamos el contentString
+			    			
+			    			var infowindow = new google.maps.InfoWindow({
+			    			    content: contentString
+			    			});
+	
+			    			google.maps.event.addListener(marker, 'click', function() {
+			    			  infowindow.open(map,marker);
+			    			});
+	    				}
+	    			});
 	    			//TODO: crear contentString desde ajax
-	    			var contentString = "<html><body><br/><br/></body></html>";
-	    			//Creamos el contentString
 	    			
-	    			var infowindow = new google.maps.InfoWindow({
-	    			    content: contentString
-	    			});
-
-	    			google.maps.event.addListener(marker, 'click', function() {
-	    			  infowindow.open(map,marker);
-	    			});
 	    		};
 
 	    	};

@@ -1,0 +1,20 @@
+<div data-role="dialog" data-fetch='always' data-theme="b" class="page-linear-chart" style="width:100%; height:100%;">
+	<div data-role="header">
+		<h1>{{=station.name}}{{if ca_type:}} (OMS){{pass}}</h1>
+	</div>
+	<div data-role="content" style="width:100%; height:100%; padding:0;"> 
+	
+		<h3>{{=T('Current data')}}</h3>
+		<p><b>{{=T('Address')}}:</b> {{=station.address}}</p>
+		
+		<div id="chart_div" style="width:100%; height:100%;"></div>
+	</div>
+	<script>
+	AireaMeGoogleApis.url_base = "{{=APP_URL}}";
+	{{if ca_type:}}
+	AireaMeGoogleApis.url_location = "/api/quality.json/{{=station.code}}/{{=ca_type}}"
+	{{else:}}
+	AireaMeGoogleApis.url_location = "/api/last.json/{{=station.code}}"
+	{{pass}}
+	</script>
+</div>

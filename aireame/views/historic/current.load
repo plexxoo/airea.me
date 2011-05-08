@@ -1,0 +1,20 @@
+<h2>{{=T('Measurement Station')}}&nbsp;{{=station.name}}&nbsp;-&nbsp;{{=T('Current data')}}</h2>
+
+<b>{{=T('Station in')}}</b>:&nbsp;{{=station.name}}&nbsp;{{=A(T('more info.'),_href=station.href,_target="_blank")}}<br />
+{{=station.address}}<br />
+<b>{{=T('Graphic representation')}}</b>
+<br />
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="{{=URL('static','js/google_apis_inits.js')}}"></script>
+<script type="text/javascript">
+google.load('visualization', '1', {'packages':['corechart']});
+AireaMeGoogleApis.url_base = "{{=APP_URL}}";
+{{if ca_type:}}
+AireaMeGoogleApis.url_location = "/api/quality.json/{{=station.code}}/{{=ca_type}}"
+{{else:}}
+AireaMeGoogleApis.url_location = "/api/last.json/{{=station.code}}"
+{{pass}}
+AireaMeGoogleApis.default_width = 600
+google.setOnLoadCallback(AireaMeGoogleApis.getDataLinearChart);
+</script>
+<div id="chart_div" style="width: 400px; height: 400px;"></div>

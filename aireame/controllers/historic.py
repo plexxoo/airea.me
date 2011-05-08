@@ -119,6 +119,14 @@ def current():
         ca_type='current'
     return dict(station=get_station_by_code(code),ca_type=ca_type)
 
+
+def current2(): #creado para la vista movil
+    [code,ca,params] = get_request_args(2)
+    ca_type=None
+    if ca:
+        ca_type='current'
+    return dict(station=get_station_by_code(code),ca_type=ca_type)
+
 def last_seven():
     [code,ca,params] = get_request_args(2)
     ca_type=None
