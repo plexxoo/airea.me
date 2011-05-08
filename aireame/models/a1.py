@@ -360,3 +360,35 @@ def get_station_by_code(code):
     tmp['lat']=row.station.latitude
     tmp['lon']=row.station.longitude
     return tmp
+
+def get_station_elements(code):
+    if code is None:
+        return []
+    
+    # Get station
+    station=get_station_by_code(code)
+    # Get station elements    
+    query=(db.station_element.station==station.id)
+    rows=db(query).select(db.station_element.code)
+    
+    elems=[]
+    for row in rows:
+        elems.append(row.code)
+    
+    return elems
+
+def get_station_ca_elements(code):
+    if code is None:
+        return []
+    
+    # Get station elements
+    station_elems=get_station_elements(code)
+        
+    elements=[]
+    for elem in station_elems:
+        if elem in QUALITY_ELEMENTS:
+            elements.append(elem)
+            
+    return elements
+    
+    

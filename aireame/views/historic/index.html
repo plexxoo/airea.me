@@ -5,7 +5,13 @@
 <li>{{=zone}}
 <ul>
 {{for station in data[zone]:}}
-<li>{{=station.name}}&nbsp;{{=A(T('current'),_href=URL(request.application,'historic','current',args=[station.code]))}}&nbsp;{{=A(T('last week'),_href=URL(request.application,'historic','last_seven',args=[station.code]))}}&nbsp;{{=A(T('original info.'),_href=station.href,_target="_blank")}}</li>
+<li>{{=station.name}}&nbsp;
+{{=A(T('current'),_href=URL(request.application,'historic','current',args=[station.code]))}}&nbsp;
+{{if station.ca:}}
+{{=A(T('ca current'),_href=URL(request.application,'historic','current',args=[station.code,'current']))}}&nbsp;
+{{pass}}
+{{=A(T('last week'),_href=URL(request.application,'historic','last_seven',args=[station.code]))}}&nbsp;
+{{=A(T('original info.'),_href=station.href,_target="_blank")}}</li>
 {{pass}}
 </ul>
 </li>

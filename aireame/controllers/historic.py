@@ -48,13 +48,20 @@ def index():
         tmp['name']=row.station.name
         tmp['code']=row.station.code
         tmp['href']=ESTATION_LINK%(row.zone.code,row.station.code)
+            
+        ca_elems=get_station_ca_elements(row.station.code)
+        if len(ca_elems)>0:
+            tmp['ca']=True
+        else:            
+            tmp['ca']=False
+        
         zone.append(tmp)
         
     return dict(data=zones,auser=auth.user)
 
 def current():
-    [code, params] = get_request_args(1)
-    return dict(station=get_station_by_code(code))
+    [code,ca,params] = get_request_args(2)
+    return dict(station=get_station_by_code(code),ca_type=ca)
 
 def last_seven():
     [code, params] = get_request_args(1) 

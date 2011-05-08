@@ -10,7 +10,11 @@
 <script type="text/javascript">
 google.load('visualization', '1', {'packages':['corechart']});
 AireaMeGoogleApis.url_base = "{{=APP_URL}}";
+{{if ca_type:}}
+AireaMeGoogleApis.url_location = "/api/quality.json/{{=station.code}}/{{=ca_type}}"
+{{else:}}
 AireaMeGoogleApis.url_location = "/api/last.json/{{=station.code}}"
+{{pass}}
 AireaMeGoogleApis.default_width = 600
 google.setOnLoadCallback(AireaMeGoogleApis.getDataLinearChart);
 </script>
