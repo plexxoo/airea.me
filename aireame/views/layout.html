@@ -44,7 +44,7 @@ div.error { background-color: red; color: white; padding: 3px; }
    <div id="logo">
     <h1>
      <!-- {{=response.title or request.application}} -->
-	<img src="{{=URL('static', 'images/logo.png')}}">
+	<img src="{{=URL('static', 'images/logo.png')}}" />
     </h1>
     <!-- <h2>
      {{=response.subtitle or '=response.subtitle'}}
@@ -70,65 +70,23 @@ div.error { background-color: red; color: white; padding: 3px; }
    <div id="sidebar">
    <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2Faireame%2F171624446224385&amp;width=292&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
     <ul>
-     <li id="search">
-      <h2>
-       <b class="text1">
-        Search
-       </b>
-      </h2>
-      <form method="get" action="">
-       <fieldset>
-        <input type="text" id="s" name="s" value="" />
-        <input type="submit" id="x" value="Search" />
-       </fieldset>
-      </form>
-     </li>
      <li>
-      <h2>
-       <strong>
-        Lorem
-       </strong>
-       Ipsum
-      </h2>
+      <h2><strong>Men&uacute;</strong>principal</h2>
       <ul>
-       <li>
-        <a href="#">
-         Fusce dui neque fringilla
-        </a>
+       <li><a href="#">Inicio</a></li>
+       <li><a href="#">Ver datos por:</a>
+		<ul>
+			<li>Zona</li>
+			<li>Estaci&oacute;n</li>
+		</ul>
        </li>
-       <li>
-        <a href="#">
-         Eget tempor eget nonummy
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         Magna lacus bibendum mauris
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         Nec metus sed donec
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         Magna lacus bibendum mauris
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         Velit semper nisi molestie
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         Eget tempor eget nonummy
-        </a>
-       </li>
+       <li><a href="#">Hist&oacute;rico</a></li>
       </ul>
      </li>
      <li>
+      <h2><strong>versi&oacute;n</strong>m&oacute;vil</h2>
+      <img src="{{=URL('static', 'images/qr.png')}}" />
+     </li>
    </div>
    <!-- end sidebar -->
    <div style="clear: both;">
@@ -140,39 +98,15 @@ div.error { background-color: red; color: white; padding: 3px; }
   <div id="footer">
    <div id="footer-menu">
     <ul>
-     <li class="active">
-      <a href="#">
-       homepage
-      </a>
-     </li>
-     <li>
-      <a href="#">
-       photo gallery
-      </a>
-     </li>
-     <li>
-      <a href="#">
-       about us
-      </a>
-     </li>
-     <li>
-      <a href="#">
-       links
-      </a>
-     </li>
-     <li>
-      <a href="#">
-       contact us
-      </a>
-     </li>
+     <li><a href="{{=URL(r=request, c="corporative", f="about_us")}}">Sobre Nosotros</a></li>
+     <li><a href="{{=URL(r=request, c="corporative", f="terms_of_use")}}">Condiciones de uso</a></li>
+     <li><a href="{{=URL(r=request, c="corporative", f="license")}}">Licencia</a></li>
+     <li><a href="{{=URL(r=request, c="corporative", f="press")}}">Prensa</a></li>
+     <li><a href="{{=URL(r=request, c="corporative", f="privacity")}}">Privacidad</a></li>
+     <li><a href="{{=URL(r=request, c="corporative", f="contact")}}">Contacto</a></li>	
     </ul>
    </div>
-   <p id="legal">
-    (c) 2008 YourSite. Design by
-    <a href="http://www.freecsstemplates.org/">
-     Free CSS Templates
-    </a>
-    .
+   <p id="legal">(c) 2011 Airea.me. Dise&ntilde;o base de <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>. Modificado por el equipo de <a href="#">airea.me</a>.
    </p>
   </div>
   <!-- end footer -->
