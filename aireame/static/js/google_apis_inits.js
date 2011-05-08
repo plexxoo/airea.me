@@ -78,14 +78,53 @@ var AireaMeGoogleApis = {
 		var latlng = new google.maps.LatLng(43, -2.59); //lat,lng de pais vasco
 		var myOptions = {
 			zoom: 8,
+			minZoom: 8,
 			center: latlng,
+			disableDefaultUI: true,
+			streetViewControl: false,
+			navigationControl: false,
+			scrollwheel: false, 
+			
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			zoomControlOptions: {
 	          style: google.maps.ZoomControlStyle.SMALL,
-	          position: google.maps.ControlPosition.LEFT_CENTER
+	          position: google.maps.ControlPosition.TOP_LEFT
 	      	}
 	    };
 	    var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+	    
+	    //Allowed bounds:
+	    // Bounds para pais vasco
+	    var strictBounds = new google.maps.LatLngBounds(
+	      new google.maps.LatLng(41.40,-4.30), 
+	      new google.maps.LatLng(44.1,-0.8)
+	    );
+
+	    // Listen for the dragend event
+	    google.maps.event.addListener(map, 'dragend', function() {
+	      if (strictBounds.contains(map.getCenter())) return;
+
+	      // We're out of bounds - Move the map back within the bounds
+
+	      var c = map.getCenter(),
+	          x = c.lng(),
+	          y = c.lat(),
+	          maxX = strictBounds.getNorthEast().lng(),
+	          maxY = strictBounds.getNorthEast().lat(),
+	          minX = strictBounds.getSouthWest().lng(),
+	          minY = strictBounds.getSouthWest().lat();
+
+	      if (x < minX) x = minX;
+	      if (x > maxX) x = maxX;
+	      if (y < minY) y = minY;
+	      if (y > maxY) y = maxY;
+
+	      map.setCenter(new google.maps.LatLng(y, x));
+	    });
+
+	    
+	    
+	    
 	    
 	    //add markers:
 	    $.each(AireaMeGoogleApis.maps_latitude, function(index,value){
