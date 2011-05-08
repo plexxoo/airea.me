@@ -504,12 +504,12 @@ span.previous:hover, span.next:hover, span.first:hover, span.last:hover {
 	color: #0094E0;
 }
 
-/* Botonera superior derecha */
+/* Upper right buttons */
 .auth_navbar a {
 	color: #fff;
 }
 
-/* Legenda */
+/* Legend */
 
 #legend {
 	float: right;
@@ -529,3 +529,23 @@ span.previous:hover, span.next:hover, span.first:hover, span.last:hover {
 	width:600px;
 	height:400px
 }
+
+/* Concentrations */
+
+#concentrations {
+	border: 1px solid #ccc;
+	background: #ededed;
+	color: #333;
+	width: 50%;
+	margin-bottom: 20px;
+}
+
+#concentrations ul, #concentrations li {
+	margin: 0px;
+}
+
+#concentrations li {
+	margin-left: 30px;
+}
+
+
