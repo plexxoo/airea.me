@@ -1,0 +1,38 @@
+<div data-role="page" data-fetch='always' data-theme="b" class="page-linear-chart" style="width:100%; height:100%;">
+	<div data-role="header">
+		<h1>{{=station.name}}</h1>
+		<a href="{{=URL(r=request, c="default", f="index")}}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div>
+	<div data-role="content" style="width:100%; height:100%; padding:0;"> 
+	
+		<h3>{{=T('Last Year')}}</h3>
+		<p><b>{{=T('Address')}}:</b> {{=station.address}}</p>
+		
+		<div id="chart_div" style="width:100%; height:100%;"></div>
+	</div>
+	<script>
+	AireaMeGoogleApis.url_base = "{{=APP_URL}}";
+	{{if ca_type:}}
+	AireaMeGoogleApis.url_location = "/api/quality.json/{{=station.code}}/{{=ca_type}}"
+	{{else:}}
+	AireaMeGoogleApis.url_location = "/api/seven.json/{{=station.code}}"
+	{{pass}}
+	</script>
+	<div data-role="footer" data-position="fixed" data-id="{{=station.code}}" data-theme="a">
+	<div data-role="navbar">
+			<ul>
+				{{if not ca_type:}}				
+				<li>{{=A(T('current'),_href=URL(request.application,'historic','current',args=[station.code]))}}</li>
+				<li>{{=A(T('last week'), _href=URL(request.application,'historic','last_seven',args=[station.code]))}}</li>
+				<li>{{=A(T('last month'),_href=URL(request.application,'historic','last_month',args=[station.code]))}}</li>
+				<li>{{=A(T('last year'),_class="ui-btn-active",_href=URL(request.application,'historic','last_year',args=[station.code]))}}</li>
+				{{else:}}
+				<li>{{=A(T('current'), _href=URL(request.application,'historic','current',args=[station.code,'quality']))}}</li>
+				<li>{{=A(T('last week'),_href=URL(request.application,'historic','last_seven',args=[station.code,'quality']))}}</li>
+				<li>{{=A(T('last month'),_href=URL(request.application,'historic','last_month',args=[station.code,'quality']))}}</li>
+				<li>{{=A(T('last year'),_class="ui-btn-active",_href=URL(request.application,'historic','last_year',args=[station.code,'quality']))}}</li>
+				{{pass}}
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
+</div>
