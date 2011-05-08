@@ -49,25 +49,14 @@ def rest_station_get(code=None):
         num+=1        
     return data
 
-def rest_station_last(code=None,ca=False):
-    # Data
-    data={}
-    if code is None:
-        return data
-        
+def _get_station_data(query=None,ca=False):
+    if query is None:
+        return {}
+    
     # CA elements: Elementos para calidad del aire
     ca_elems=QUALITY_ELEMENTS
     
-    # Initialize configuration
-    cfg=Configure()
-    cur_date = cfg.get('current_date')
-    if cur_date is None:
-        return data
-    # Prepare date
-    today=get_date_from_string(cur_date, "%Y-%m-%d")
-
     # Get Values
-    query=(db.measurement.measurement_date==today)&(db.measurement.station==db.station.id)&(db.station.code==code)
     rows=db(query).select(db.measurement.id,db.measurement.element,db.measurement.measurement_hour,db.measurement.value,orderby="measurement.element ASC,measurement.measurement_hour ASC")
     elements={}
     for row in rows:
@@ -86,9 +75,58 @@ def rest_station_last(code=None,ca=False):
         for index in range(1,25):
             values[index].append(elem[index])
             
-    data['values']=values
-    data['columns']=elements.keys()
-        
+    return {'values': values,'columns':elements.keys()}
+
+def rest_station_last(code=None,ca=False):
+    # Data
+    data={}
+    if code is None:
+        return data
+    
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+
+    # Get Values
+    query=(db.measurement.measurement_date==today)&(db.measurement.station==db.station.id)&(db.station.code==code)
+    return _get_station_data(query,ca)
+
+def rest_station_seven(code=None,ca=False):
+    from datetime import timedelta
+    
+    # Data
+    data={}
+    if code is None:
+        return data
+    
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+    seven_days = timedelta(days=7)
+    last7_date=today-seven_days
+    
+
+    # Get Values
+    query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
+    rows=db(query).select(db.daily_statistics.element,db.daily_statistics.statistic_date,db.daily_statistics.value,orderby="daily_statistics.element ASC,daily_statistics.statistic_date ASC")
+
+    counter=0
+    for row in rows:
+        tmp={}
+        tmp['name']=row.element
+        tmp['date']=row.statistic_date
+        tmp['value']=row.value
+        tmp['element']=row.element
+        data[counter]=tmp
+        counter+=1
     return data
 
 
