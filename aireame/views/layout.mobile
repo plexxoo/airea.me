@@ -19,6 +19,11 @@
                 loadingMessage: "Cargando..."
             });
         $.mobile.page.prototype.options.backBtnText = "Volver";
+        $.mobile.selectmenu.prototype.options.closeText = "Cerrar";
+        $.mobile.listview.prototype.options.filterPlaceholder = "Filtrar...";
+        $.mobile.collapsible.prototype.options.expandCueText = "click para expandir contenidos";
+        $.mobile.collapsible.prototype.options.collapseCueText = "click para contraer contenidos";
+		$.mobile.dialog.prototype.options.closeBtnText = "Cerrar";;
         });
 	</script>
 	<script type="text/javascript" src="{{=URL('static','js/jquery.mobile-1.0a4.1/jquery.mobile-1.0a4.1.js')}}"></script>
