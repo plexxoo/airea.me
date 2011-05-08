@@ -21,8 +21,9 @@ response.meta.copyright = 'Copyright 2011'
 ##########################################
 
 response.menu = [
-    (T('Home'), False, URL('default','index'), []),
-    (T('Historic'), False, URL(request.application, 'historic', 'index'),[])
+    (T('Geographic Scope'), False, URL('corporative','field'), []),
+    (T('Air Quality'), False, URL('corporative','air_quality'), []),
+    (T('Data Interpretation'), False, URL('corporative','data'), [])
     ]
 
 ##########################################
