@@ -1,0 +1,13 @@
+<div data-role="dialog" data-theme="e">
+	<div data-role="header" data-theme="e">
+		<h1>{{=T('Help')}}</h1>
+	</div>
+	<div data-role="content"> 
+		<ul data-role="listview">
+			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Optimo" class="ui-li-icon">Nivel de calidad optimo seg&uacute;n OMS</li>
+			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Moderado" class="ui-li-icon">Nivel de calidad moderado seg&uacute;n OMS</li>
+			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Excedido" class="ui-li-icon">Niveles superados seg&uacute;n OMS</li>
+			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Excedido" class="ui-li-icon">La estacion no puede ofrecer datos de medida regulados por la OMS</li>
+		</ul>
+	</div>
+</div>

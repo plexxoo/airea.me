@@ -40,6 +40,9 @@ def linearchart():
 def prueba():
     return dict()
 
+def help():
+    return dict()
+
 def user():
     """
     exposes:
