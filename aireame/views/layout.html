@@ -16,6 +16,9 @@ Description: A two-column, fixed-width and lightweight template ideal for 1024x7
   <title>
    {{=response.title or request.application}}
   </title>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="{{=URL(request.application,'static','images/favicon.ico')}}">
+  <link rel="apple-touch-icon" href="{{=URL(request.application,'static','images/favicon.png')}}">
   
   {{response.files.append(URL('static','css/superfish.css'))}}
   {{response.files.append(URL('static','js/superfish.js'))}}
