@@ -46,7 +46,26 @@ def seven():
     return locals()
 
 @request.restful()
+def month():
+    def GET(id=None):
+        return rest_station_month(id)
+    return locals()
+
+@request.restful()
+def year():
+    def GET(id=None):
+        return rest_station_year(id)
+    return locals()
+
+
+@request.restful()
 def quality():
     def GET(id=None,type=None):
         return rest_quality(id,type)
+    return locals()
+
+@request.restful()
+def stationqa():
+    def GET(id=None):
+        return rest_station_qa_get(id)
     return locals()

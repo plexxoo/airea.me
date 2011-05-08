@@ -15,7 +15,7 @@
 	{{if ca_type:}}
 	AireaMeGoogleApis.url_location = "/api/quality.json/{{=station.code}}/{{=ca_type}}"
 	{{else:}}
-	AireaMeGoogleApis.url_location = "/api/seven.json/{{=station.code}}"
+	AireaMeGoogleApis.url_location = "/api/month.json/{{=station.code}}"
 	{{pass}}
 	</script>
 	<div data-role="footer" data-id="{{=station.code}}" data-theme="a" data-position="fixed">

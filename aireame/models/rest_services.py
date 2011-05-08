@@ -43,14 +43,17 @@ def rest_station_get(code=None):
         tmp={}
         tmp['id']=row.station.identifier
         tmp['name']=row.station.name
+        tmp['code']=row.station.code
         tmp['address']="%s - %s"%(row.station.address,row.town.name)
         tmp['external_url']=ESTATION_LINK%(row.zone.code,row.station.code)
         tmp['lat']=row.station.latitude
         tmp['lon']=row.station.longitude
         if len(station_elements)==0:
             tmp['level']=0
+            tmp['qa']={}
         else:            
             tmp['level']=get_station_ca_level(row.station.code)
+            tmp['qa']=rest_station_qa_get(row.station.code)
         data[num]=tmp
         num+=1        
     return data
@@ -105,6 +108,40 @@ def _get_station_range(query=None,ca=False):
             counter+=1
     return data
 
+def _get_station_range_mobile(query=None,ca=False):
+    if query is None:
+        return {}
+    
+    data={}
+    
+    # Get Values
+    rows=db(query).select(db.daily_statistics.element,db.daily_statistics.statistic_date,db.daily_statistics.value,orderby="daily_statistics.element ASC,daily_statistics.statistic_date ASC")
+    dates=[]
+    elements={}
+    for row in rows:
+        if ca:
+            if (row.element in QUALITY_ELEMENTS) is False:
+                continue
+        if (row.element in elements.keys()) is False:
+            elements[row.element]={}
+        #date_lit=row.statistic_date.toordinal() #strftime('%Y%m%d')
+        date_lit=int(row.statistic_date.strftime('%m%d'))
+        if (date_lit in dates) is False:
+            dates.append(date_lit)
+        elements[row.element][date_lit]=row.value
+#        elements[row.element][row.statistic_date]=row.value
+    values={}
+    for index in dates:
+        values[index]=[]
+    
+    for item in elements.keys():
+        elem=elements[item]
+        for index in dates:
+            values[index].append(elem[index])
+#    s_values=sorted_dict(values)
+    return {'values': values,'columns':elements.keys()}
+
+
 def rest_station_last(code=None,ca=False):
     # Data
     data={}
@@ -143,7 +180,10 @@ def rest_station_seven(code=None,ca=False):
 
     # Get Values
     query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
-    return _get_station_range(query,ca)
+    if check_is_mobile():
+        return _get_station_range_mobile(query,ca)
+    else:
+        return _get_station_range(query,ca)
 
 def rest_station_month(code=None,ca=False):
     from datetime import timedelta
@@ -165,7 +205,10 @@ def rest_station_month(code=None,ca=False):
 
     # Get Values
     query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
-    return _get_station_range(query,ca)
+    if check_is_mobile():
+        return _get_station_range_mobile(query,ca)
+    else:
+        return _get_station_range(query,ca)
 
 def rest_station_year(code=None,ca=False):
     from datetime import timedelta
@@ -187,7 +230,10 @@ def rest_station_year(code=None,ca=False):
 
     # Get Values
     query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
-    return _get_station_range(query,ca)
+    if check_is_mobile():
+        return _get_station_range_mobile(query,ca)
+    else:
+        return _get_station_range(query,ca)
 
 def rest_quality(code=None,type=None):
     # Data
@@ -207,3 +253,30 @@ def rest_quality(code=None,type=None):
         return rest_station_year(code,True)
     else:
         return data
+    
+
+def rest_station_qa_get(code=None):
+    data={}   
+    if code is None:
+        return data
+    # Get station
+    station=get_station_by_code(code)
+    
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+
+    # Get Values
+    query=(db.daily_statistics.statistic_date==today)&(db.daily_statistics.station==station.id)
+    rows=db(query).select(db.daily_statistics.element,db.daily_statistics.statistic_date,db.daily_statistics.value,orderby="daily_statistics.element ASC")
+    
+    for row in rows:
+        if row.element in QUALITY_ELEMENTS:
+            data[row.element]=row.value 
+    data['level']=calculate_ca(data)
+    
+    return data

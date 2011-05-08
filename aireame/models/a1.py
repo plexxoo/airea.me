@@ -434,10 +434,18 @@ def calculate_ca(elements):
             indexes.append(_get_level(elements[elem],20,10))
     
     index=0
+    is_max=False
     for item in indexes:
+        if index==3:
+            is_max=True
         index+=item
         
-    return math.ceil(index/len(indexes))
+    if is_max:
+        return 3
+    if len(indexes) > 0:
+        return math.ceil(index/len(indexes))
+    else:
+        return 1
         
     
 def _get_level(value,max,min):
@@ -447,4 +455,8 @@ def _get_level(value,max,min):
         return 2
     else:
         return 1
-                                        
+    
+def check_is_mobile():
+    detect = local_import("detect") 
+    return detect.detect_mobile_browser(request.env.http_user_agent)
+    
