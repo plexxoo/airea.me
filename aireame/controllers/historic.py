@@ -143,7 +143,8 @@ def last_year():
 
     return dict(station=get_station_by_code(code),ca_type=ca_type)
 
-
+def marker():
+    return dict()
 
 
 
