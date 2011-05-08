@@ -8,11 +8,7 @@ def contact(): return dict()
 
 def field(): return dict()
 
-def air_quality(): return dict()
-
 def field(): return dict()
-
-def data(): return dict()
 
 def license(): return dict()
 
