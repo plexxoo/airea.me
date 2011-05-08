@@ -1,3 +1,4 @@
+T.force('es-es')
 if request.env.http_user_agent:
     import os
     detect = local_import("detect")
