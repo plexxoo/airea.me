@@ -83,7 +83,7 @@ var AireaMeGoogleApis = {
 			disableDefaultUI: true,
 			streetViewControl: false,
 			navigationControl: false,
-			scrollwheel: false, 
+			scrollwheel: true, 
 			
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			zoomControlOptions: {
@@ -131,7 +131,9 @@ var AireaMeGoogleApis = {
 	    	if(index > 0){
 	    		var marker = new google.maps.Marker({  
 	    			  position: new google.maps.LatLng(AireaMeGoogleApis.maps_latitude[index], AireaMeGoogleApis.maps_longitude[index]), 
-	    			  map: map  
+	    			  map: map,  
+	    			  title: AireaMeGoogleApis.maps_estacion[index],
+	    			  icon: AireaMeGoogleApis.url_base+"/static/images/molinillo.png"
 	    		});
 	    		
 	    		//aniadir evento click al marcador	    		
