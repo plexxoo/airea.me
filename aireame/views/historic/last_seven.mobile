@@ -23,12 +23,12 @@
 			<ul>
 				{{if not ca_type:}}				
 				<li>{{=A(T('current'),_href=URL(request.application,'historic','current',args=[station.code])+"/")}}</li>
-				<li>{{=A(T('last week'),_class="ui-btn-active", _href=URL(request.application,'historic','last_seven',args=[station.code])+"/")}}</li>
+				<li>{{=A(T('last week'),_class="ui-btn-active ui-state-persist", _href=URL(request.application,'historic','last_seven',args=[station.code])+"/")}}</li>
 				<li>{{=A(T('last month'),_href=URL(request.application,'historic','last_month',args=[station.code])+"/")}}</li>
 				<li>{{=A(T('last year'),_href=URL(request.application,'historic','last_year',args=[station.code])+"/")}}</li>
 				{{else:}}
 				<li>{{=A(T('current'), _href=URL(request.application,'historic','current',args=[station.code,'quality'])+"/")}}</li>
-				<li>{{=A(T('last week'),_class="ui-btn-active", _href=URL(request.application,'historic','last_seven',args=[station.code,'quality'])+"/")}}</li>
+				<li>{{=A(T('last week'),_class="ui-btn-active ui-state-persist", _href=URL(request.application,'historic','last_seven',args=[station.code,'quality'])+"/")}}</li>
 				<li>{{=A(T('last month'),_href=URL(request.application,'historic','last_month',args=[station.code,'quality'])+"/")}}</li>
 				<li>{{=A(T('last year'),_href=URL(request.application,'historic','last_year',args=[station.code,'quality'])+"/")}}</li>
 				{{pass}}
