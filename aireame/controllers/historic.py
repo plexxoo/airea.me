@@ -38,7 +38,7 @@ def index():
     for row in rows:
         if cur_zone != row.zone.name:
             if zone is not None:
-                zones[row.zone.name]=zone
+                zones[cur_zone]=zone
             zone=[]
             cur_zone = row.zone.name
             
