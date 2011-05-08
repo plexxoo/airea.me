@@ -1,3 +1,50 @@
 {{extend 'layout.html'}}
-<h1>Interpretación de los datos</h1>
-Según la OMS ....
+<h1>&iquest;Cómo calculamos el indice actual de calidad?</h1>
+<p>Se han valorado los elementos los elementos marcados como contaminantes en las directrices de 2005 de la OMS sobre calidad de aire por tener un efecto dañino para la salud: partículas en suspensión (MP<sub>2.5</sub> y MP<sub>10</sub>), ozono (O<sub>3</sub>, dióxido de nitrógeno (NO<sub>2</sub>) y dióxido de azufre (SO<sub>2</sub>).</p>
+<p>Para la media diaria de esos campos, aplicamos las siguientes reglas:</p>
+<ul>
+	<li>Si el valor es igual o superior al límite máximo propuesto por la OMS, le otorgamos un nivel 3;</li>
+	<li>Si el valor es igual o superior al límite mínimo propuesto por la OMS, le otorgamos un nivel 2;</li>
+	<li>Si está por por debajo del límite mínimo propuesto por la OMS, le otorgamos un nivel 1.</li>	
+</ul>
+<p>Por defecto hemos definido tres estados:</p>
+<ul>
+	<li>Calidad Óptima (nivel 1)</li>
+	<li>Calidad Moderada (nivel 2)</li>
+	<li>Nivel Excedido (nivel 3) </li>
+</ul>
+<p>Los límites utilizados para delimitar los estados son, por debajo, la mitad del límite máximo establecido por la OMS y, por arriba el límite máximo:</p>
+<table>
+	<th>Compuesto</th>
+	<th>Máximo</th>
+	<th>Mínimo</th>
+	<tr>
+		<td>MP<sub>2.5</sub></td>
+		<td>25</td>
+		<td>15</td>
+	</tr>
+	<tr>
+		<td>MP<sub>10</sub></td>
+		<td>50</td>
+		<td>20</td>
+	</tr>
+	<tr>
+		<td>O<sub>3</sub></td>
+		<td>100</td>
+		<td>50</td>
+	</tr>
+	<tr>
+		<td>NO<sub>2</sub></td>
+		<td>200</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>SO<sub>2</sub></td>
+		<td>20</td>
+		<td>10</td>
+	</tr>
+</table>
+
+<p><b>Aunque sólo uno de los elementos supere el límite superior, la calidad se marcará como nivel excedido.</b> Si ningún compuesto supera el límite máximo se asignan el valor que tenga a un nivel (1, 2 y 3) y se realiza una media ponderada redondeando al entero más cercano.</p>
+
+

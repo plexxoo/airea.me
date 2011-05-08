@@ -101,6 +101,26 @@ input, textarea, select {
 	background: #7ACF00 url(images/img03.jpg);
 }
 
+table {
+	width: 50%;
+	text-align: center;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	background: #ededed;
+	color: #333;
+	margin-bottom: 10px; 	
+}
+
+table th {
+	background: #666;
+	color: #fff;
+}
+
+table tr {
+	border-bottom: 1px solid #fff;
+}
+
+
 /* Header */
 
 #header {
@@ -282,6 +302,7 @@ input, textarea, select {
 .post .meta a {
 	color: #FFFFFF;
 }
+
 /* Sidebar */
 
 #sidebar {
