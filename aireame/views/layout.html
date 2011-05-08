@@ -44,7 +44,7 @@ div.error { background-color: red; color: white; padding: 3px; }
    <div id="logo">
     <h1>
      <!-- {{=response.title or request.application}} -->
-	<img src="{{=URL('static', 'images/logo.png')}}" />
+	<a href="{{=APP_URL}}" title="Página Principal"><img src="{{=URL('static', 'images/logo.png')}}" /></a>
     </h1>
     <!-- <h2>
      {{=response.subtitle or '=response.subtitle'}}
@@ -71,7 +71,7 @@ div.error { background-color: red; color: white; padding: 3px; }
    <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2Faireame%2F171624446224385&amp;width=292&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
     <ul>
      <li>
-      <h2><strong>Men&uacute;</strong>principal</h2>
+      <h2><strong>Men&uacute;</strong> principal</h2>
       <ul>
        <li><a href="#">Inicio</a></li>
        <li><a href="#">Ver datos por:</a>
@@ -84,7 +84,7 @@ div.error { background-color: red; color: white; padding: 3px; }
       </ul>
      </li>
      <li>
-      <h2><strong>versi&oacute;n</strong>m&oacute;vil</h2>
+      <h2><strong>versi&oacute;n</strong> m&oacute;vil</h2>
       <img src="{{=URL('static', 'images/qr.png')}}" />
      </li>
    </div>
@@ -98,7 +98,7 @@ div.error { background-color: red; color: white; padding: 3px; }
   <div id="footer">
    <div id="footer-menu">
     <ul>
-     <li><a href="{{=URL(r=request, c="corporative", f="about_us")}}">Sobre Nosotros</a></li>
+     <li><a href="{{=URL(r=request, c="corporative", f="about_us")}}">Sobre Nosotras</a></li>
      <li><a href="{{=URL(r=request, c="corporative", f="terms_of_use")}}">Condiciones de uso</a></li>
      <li><a href="{{=URL(r=request, c="corporative", f="license")}}">Licencia</a></li>
      <li><a href="{{=URL(r=request, c="corporative", f="press")}}">Prensa</a></li>
