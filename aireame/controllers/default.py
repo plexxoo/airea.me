@@ -29,7 +29,9 @@
 
 def index():
 
-    return dict(message=response.view)
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    return dict(message=response.view,date=cur_date.strftime('%d/%m/%Y'))
 
 def map():
     return dict()
