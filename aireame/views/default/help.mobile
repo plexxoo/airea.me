@@ -4,10 +4,10 @@
 	</div>
 	<div data-role="content"> 
 		<ul data-role="listview">
-			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Optimo" class="ui-li-icon">Nivel de calidad optimo seg&uacute;n OMS</li>
-			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Moderado" class="ui-li-icon">Nivel de calidad moderado seg&uacute;n OMS</li>
-			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Excedido" class="ui-li-icon">Niveles superados seg&uacute;n OMS</li>
-			<li><img src="{{=URL("static","images/molinillo.png")}}" alt="Excedido" class="ui-li-icon">La estacion no puede ofrecer datos de medida regulados por la OMS</li>
+			<li><img src="{{=URL("static","images/molino_1.png")}}" alt="Optimo" class="ui-li-icon">Nivel de calidad optimo seg&uacute;n OMS</li>
+			<li><img src="{{=URL("static","images/molino_2.png")}}" alt="Moderado" class="ui-li-icon">Nivel de calidad moderado seg&uacute;n OMS</li>
+			<li><img src="{{=URL("static","images/molino_3.png")}}" alt="Excedido" class="ui-li-icon">Niveles superados seg&uacute;n OMS</li>
+			<li><img src="{{=URL("static","images/molino_0.png")}}" alt="Excedido" class="ui-li-icon">La estacion no puede ofrecer datos de medida regulados por la OMS</li>
 		</ul>
 	</div>
 </div>
