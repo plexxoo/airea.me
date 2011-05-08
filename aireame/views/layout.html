@@ -68,18 +68,14 @@ div.error { background-color: red; color: white; padding: 3px; }
    <!-- end content -->
    <!-- start sidebar -->
    <div id="sidebar">
-   <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2Faireame%2F171624446224385&amp;width=292&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
-    <ul>
+   <ul>
+     <li><iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2Faireame%2F171624446224385&amp;width=292&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe></li>
      <li>
       <h2><strong>Men&uacute;</strong> principal</h2>
       <ul>
        <li><a href="{{=URL(r=request, c="default", f="index")}}">Inicio</a></li>
-       <li>Ver datos por:
-		<ul>
-			<li><a href="{{=URL(r=request, c="historic", f="zone")}}">Zona</a></li>
-			<li><a href="{{=URL(r=request, c="historic", f="station")}}">Estaci&oacute;n</a></li>
-		</ul>
-       </li>
+       <li><a href="{{=URL(r=request, c="historic", f="zone")}}">Datos por zona</a></li>
+       <li><a href="{{=URL(r=request, c="historic", f="station")}}">Datos por estaci&oacute;n</a></li>
       </ul>
      </li>
      <li>

@@ -318,10 +318,14 @@ table tr {
 }
 
 #sidebar li {
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 
 #sidebar li ul {
+	margin-top: -20px;
+}
+
+#sidebar li ul li {
 }
 
 #sidebar li li {
@@ -341,6 +345,7 @@ table tr {
 	font-size: 18px;
 	font-weight: bold;
 	color: #005f92;
+	border-bottom: 1px dashed #8bcb2f;
 }
 
 #sidebar strong, #sidebar b {
