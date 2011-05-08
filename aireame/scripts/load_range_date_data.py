@@ -30,7 +30,7 @@
 
 # Use:
 # From web2py directory, console mode, write...
-# $ ./web2py.py -S aireame -M -R applications/aireame/scripts/load_current_date_data.py
+# $ ./web2py.py -S aireame -M -R applications/aireame/scripts/load_range_date_data.py
 
 import time
 import datetime
@@ -54,24 +54,20 @@ def generate_statistical_data(date=None):
         for row in rows:
             print "Processing %i "%row.id
             statistical_data_of_station(row.id,date)
-        
+
 init_time=time.time()
-today=get_current_date_from_datasource()
 # Initialize configuration
-cfg=Configure()
-cur_date = cfg.get('current_date')
-get_data=False
-if cur_date is None:
-    get_data=True
-if today!=cur_date:
-    get_data=True
-    
-if get_data:
-    print today
-    load_data(today)
-    generate_statistical_data(today)
-    cfg.set('current_date',today)
+date_range=['2011-05-01','2011-05-02','2011-05-03','2011-05-04','2011-05-05','2011-05-06']
+#date_range=['2011-04-01','2011-04-02','2011-04-03','2011-04-04','2011-04-05','2011-04-06','2011-04-07','2011-04-08','2011-04-09','2011-04-10',
+#            '2011-04-11','2011-04-12','2011-04-13','2011-04-14','2011-04-15','2011-04-16','2011-04-17','2011-04-18','2011-04-19','2011-04-20',
+#            '2011-04-21','2011-04-22','2011-04-23','2011-04-24','2011-04-25','2011-04-26','2011-04-27','2011-04-28','2011-04-29','2011-04-30']
+
+for date_lit in date_range:
+    date=get_date_from_string(date_lit) #"%Y-%m-%d"
+    print date
+    load_data(date)
+    generate_statistical_data(date)
     
 end_time=time.time()
 process_time=end_time-init_time
-print "All data processed in %f secs.\n"%process_time
+print "All data processed in %f secs"%process_time
