@@ -49,7 +49,6 @@ var AireaMeGoogleApis = {
 	
 	/* Map */
 	initializeMap: function(){
-		
 		$.ajax({
 			url: AireaMeGoogleApis.url_base + AireaMeGoogleApis.map_url_location,
 			dataType: 'json',
@@ -60,7 +59,6 @@ var AireaMeGoogleApis = {
 	
 	
 	prepareStations: function(json_data) {
-		
 		$.each(json_data, function(key,val) {
 			AireaMeGoogleApis.maps_identifier[key]=val.id;
 			AireaMeGoogleApis.maps_estacion[key]=val.name;
@@ -107,7 +105,7 @@ var AireaMeGoogleApis = {
 	    			//en caso de navegador normal:
 	    			
 	    			//TODO: crear contentString desde ajax
-	    			var contentString = "";
+	    			var contentString = "<html><body><br/><br/></body></html>";
 	    			//Creamos el contentString
 	    			
 	    			var infowindow = new google.maps.InfoWindow({
@@ -121,6 +119,7 @@ var AireaMeGoogleApis = {
 
 	    	};
 	    });
+	    
 	    if(AireaMeGoogleApis.is_mobile){
 	    $.mobile.pageLoading (true);
 	    }
