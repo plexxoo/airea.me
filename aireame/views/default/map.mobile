@@ -8,5 +8,6 @@
 	</div>
 	<script>
 	AireaMeGoogleApis.url_base = "{{=APP_URL}}";
+	AireaMeGoogleApis.is_mobile = true;
 	</script>
 </div>
