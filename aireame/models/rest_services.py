@@ -53,15 +53,12 @@ def _get_station_data(query=None,ca=False):
     if query is None:
         return {}
     
-    # CA elements: Elementos para calidad del aire
-    ca_elems=QUALITY_ELEMENTS
-    
     # Get Values
     rows=db(query).select(db.measurement.id,db.measurement.element,db.measurement.measurement_hour,db.measurement.value,orderby="measurement.element ASC,measurement.measurement_hour ASC")
     elements={}
     for row in rows:
         if ca:
-            if (row.element in ca_elems) is False:
+            if (row.element in QUALITY_ELEMENTS) is False:
                 continue
         if (row.element in elements.keys()) is False:
             elements[row.element]={}
@@ -76,6 +73,31 @@ def _get_station_data(query=None,ca=False):
             values[index].append(elem[index])
             
     return {'values': values,'columns':elements.keys()}
+
+def _get_station_range(query=None,ca=False):
+    if query is None:
+        return {}
+    
+    data={}
+    
+    # Get Values
+    rows=db(query).select(db.daily_statistics.element,db.daily_statistics.statistic_date,db.daily_statistics.value,orderby="daily_statistics.element ASC,daily_statistics.statistic_date ASC")
+
+    counter=0
+    for row in rows:
+        tmp={}
+        tmp['name']=row.element
+        tmp['date']=row.statistic_date
+        tmp['value']=row.value
+        tmp['element']=row.element
+        add_elem=True
+        if ca:
+            if (row.element in QUALITY_ELEMENTS) is False:
+                add_elem=False
+        if add_elem:
+            data[counter]=tmp
+            counter+=1
+    return data
 
 def rest_station_last(code=None,ca=False):
     # Data
@@ -99,9 +121,8 @@ def rest_station_seven(code=None,ca=False):
     from datetime import timedelta
     
     # Data
-    data={}
     if code is None:
-        return data
+        return {}
     
     # Initialize configuration
     cfg=Configure()
@@ -116,19 +137,51 @@ def rest_station_seven(code=None,ca=False):
 
     # Get Values
     query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
-    rows=db(query).select(db.daily_statistics.element,db.daily_statistics.statistic_date,db.daily_statistics.value,orderby="daily_statistics.element ASC,daily_statistics.statistic_date ASC")
+    return _get_station_range(query,ca)
 
-    counter=0
-    for row in rows:
-        tmp={}
-        tmp['name']=row.element
-        tmp['date']=row.statistic_date
-        tmp['value']=row.value
-        tmp['element']=row.element
-        data[counter]=tmp
-        counter+=1
-    return data
+def rest_station_month(code=None,ca=False):
+    from datetime import timedelta
+    
+    # Data
+    if code is None:
+        return {}
+    
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+    seven_days = timedelta(days=30)
+    last7_date=today-seven_days
+    
 
+    # Get Values
+    query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
+    return _get_station_range(query,ca)
+
+def rest_station_year(code=None,ca=False):
+    from datetime import timedelta
+    
+    # Data
+    if code is None:
+        return {}
+    
+    # Initialize configuration
+    cfg=Configure()
+    cur_date = cfg.get('current_date')
+    if cur_date is None:
+        return data
+    # Prepare date
+    today=get_date_from_string(cur_date, "%Y-%m-%d")
+    seven_days = timedelta(days=365)
+    last7_date=today-seven_days
+    
+
+    # Get Values
+    query=(db.daily_statistics.statistic_date>=last7_date)&(db.daily_statistics.statistic_date<=today)&(db.daily_statistics.station==db.station.id)&(db.station.code==code)
+    return _get_station_range(query,ca)
 
 def rest_quality(code=None,type=None):
     # Data
@@ -140,5 +193,11 @@ def rest_quality(code=None,type=None):
         
     if type=='current':
         return rest_station_last(code,True)
+    elif type=='seven':
+        return rest_station_seven(code,True)
+    elif type=='month':
+        return rest_station_month(code,True)
+    elif type=='year':
+        return rest_station_year(code,True)
     else:
         return data

@@ -61,9 +61,36 @@ def index():
 
 def current():
     [code,ca,params] = get_request_args(2)
-    return dict(station=get_station_by_code(code),ca_type=ca)
+    ca_type=None
+    if ca:
+        ca_type='current'
+    return dict(station=get_station_by_code(code),ca_type=ca_type)
 
 def last_seven():
-    [code, params] = get_request_args(1) 
-    return dict(station=get_station_by_code(code))
+    [code,ca,params] = get_request_args(2)
+    ca_type=None
+    if ca:
+        ca_type='seven'
+
+    return dict(station=get_station_by_code(code),ca_type=ca_type)
+
+def last_month():
+    [code,ca,params] = get_request_args(2)
+    ca_type=None
+    if ca:
+        ca_type='month'
+
+    return dict(station=get_station_by_code(code),ca_type=ca_type)
+
+def last_year():
+    [code,ca,params] = get_request_args(2)
+    ca_type=None
+    if ca:
+        ca_type='year'
+
+    return dict(station=get_station_by_code(code),ca_type=ca_type)
+
+
+
+
 
